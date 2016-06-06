@@ -1,0 +1,9 @@
+{
+    "require": {
+        "nette/bootstrap": "2.2.*"
+    },
+    "require-dev": {
+        "nette/robot-loader": "2.2.*",
+        "nette/caching": "2.2.*"
+    }
+}

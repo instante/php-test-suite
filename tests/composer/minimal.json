@@ -1,0 +1,8 @@
+{
+    "require-dev": {
+        "~CLEAR": [
+            "nette/robot-loader",
+            "nette/caching"
+        ]
+    }
+}
