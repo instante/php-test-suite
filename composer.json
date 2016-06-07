@@ -31,7 +31,6 @@
         }
     },
     "bin": [
-        "src/unit-test-bootstrap.php",
         "src/test-bootstrap.php"
     ]
 }
