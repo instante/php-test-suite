@@ -2,6 +2,7 @@
 
 namespace Instante\Tests;
 
+use Nette\DI\Container;
 use Nette\InvalidStateException;
 use Tester\Environment;
 use Nette\Loaders\RobotLoader;
@@ -38,6 +39,14 @@ class TestBootstrap
         static::prepareRobotLoader();
     }
 
+    /**
+     * @param string $testsDir
+     * @param string $rootDir
+     * @param string $appDir
+     * @param string $vendorDir
+     * @param string $configDir
+     * @return Container
+     */
     public static function prepareIntegrationTest(
         $testsDir,
         $rootDir = NULL,

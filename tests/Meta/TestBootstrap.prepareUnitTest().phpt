@@ -1,7 +1,9 @@
 <?php
+namespace Instante\Tests\Meta;
 
 use Instante\Tests\TestBootstrap;
 use Nette\InvalidStateException;
+use Nette\IOException;
 use Tester\Assert;
 
 class MockEnvironment
@@ -20,7 +22,7 @@ require '../../src/test-bootstrap.php';
 try {
     TestBootstrap::prepareUnitTest(__DIR__ . '/..');
     Assert::fail('should have crashed on missing app dir');
-} catch (\Nette\IOException $ex) { //expected to fail on robot loader to non-existent default app dir
+} catch (IOException $ex) { //expected to fail on robot loader to non-existent default app dir
 }
 //test default paths
 Assert::same(__DIR__ . '/../..', TestBootstrap::$rootDir);
