@@ -8,7 +8,7 @@ use Nette\Security\IUserStorage;
 class MockUserStorage implements IUserStorage
 {
     /** @var bool */
-    private $authenticated;
+    private $authenticated = FALSE;
 
     /** @var IIdentity */
     private $identity;
@@ -18,7 +18,7 @@ class MockUserStorage implements IUserStorage
 
     public function setAuthenticated($state)
     {
-        $this->authenticated = $state;
+        $this->authenticated = (bool)$state;
     }
 
     public function isAuthenticated()

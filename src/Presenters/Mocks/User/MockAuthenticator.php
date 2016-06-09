@@ -12,7 +12,7 @@ use Nette\Security\IIdentity;
  */
 class MockAuthenticator implements IAuthenticator
 {
-    /** @var array list of pairs username => [password, identity] */
+    /** @var array list of pairs username => [password, identity] | password */
     public $userList;
 
     /** @var array list of pairs username => role[] */

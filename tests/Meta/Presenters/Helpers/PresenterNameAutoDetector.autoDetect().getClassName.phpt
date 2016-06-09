@@ -1,12 +1,9 @@
 <?php
 namespace Instante\Tests\Meta\Presenters\Helpers;
 
-use Instante\Tests\Presenters\DI\PrimaryDependencyContainer;
 use Instante\Tests\Presenters\Helpers\PresenterNameAutoDetector;
-use Instante\Tests\Presenters\Request\RequestBuilder;
 use Instante\Tests\TestBootstrap;
 use Nette\Application\UI\Presenter;
-use Nette\DI\Container;
 use Nette\InvalidArgumentException;
 use Tester\Assert;
 
