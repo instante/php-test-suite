@@ -4,6 +4,7 @@ namespace Instante\Tests\Presenters\Mocks;
 
 use Nette\Application\UI\ITemplate;
 use Nette\InvalidArgumentException;
+use Nette\InvalidStateException;
 
 class MockTemplate implements ITemplate
 {
@@ -14,10 +15,13 @@ class MockTemplate implements ITemplate
     private $params = [];
 
     /** @var array */
-    public $called = [];
+    private $called = [];
 
     public function render()
     {
+        if ($this->file === NULL) {
+            throw new InvalidStateException('Please set a template file first');
+        }
         return file_get_contents($this->file);
     }
 
@@ -58,5 +62,11 @@ class MockTemplate implements ITemplate
     public function __unset($name)
     {
         unset($this->params[$name]);
+    }
+
+    /** @return array */
+    public function getCalledMethods()
+    {
+        return $this->called;
     }
 }
