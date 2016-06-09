@@ -1,5 +1,5 @@
 <?php
-namespace Instante\Tests\Meta\Presenters\Helpers;
+namespace Instante\Tests\Meta\Presenters\Mocks\User;
 
 use Instante\Tests\Presenters\Mocks\User\MockAuthenticator;
 use Instante\Tests\TestBootstrap;
@@ -8,7 +8,7 @@ use Nette\Security\IAuthenticator;
 use Nette\Security\IIdentity;
 use Tester\Assert;
 
-require '../../../../bootstrap.php';
+require __DIR__ . '/../../../../bootstrap.php';
 
 TestBootstrap::prepareUnitTest();
 

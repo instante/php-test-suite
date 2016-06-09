@@ -6,7 +6,7 @@ use Instante\Tests\TestBootstrap;
 use Nette\Application\UI\Presenter;
 use Tester\Assert;
 
-require '../../../bootstrap.php';
+require __DIR__ . '/../../../bootstrap.php';
 
 class MockInjectionPresenter extends Presenter
 {

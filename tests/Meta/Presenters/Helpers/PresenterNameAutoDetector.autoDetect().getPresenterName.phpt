@@ -6,7 +6,7 @@ use Instante\Tests\TestBootstrap;
 use Nette\InvalidArgumentException;
 use Tester\Assert;
 
-require '../../../bootstrap.php';
+require __DIR__ . '/../../../bootstrap.php';
 
 TestBootstrap::prepareUnitTest();
 

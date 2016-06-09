@@ -5,7 +5,7 @@ use Instante\Tests\TestBootstrap;
 use Nette\DI\Container;
 use Tester\Assert;
 
-require '../../src/test-bootstrap.php';
+require __DIR__ . '/../../src/test-bootstrap.php';
 
 $container = TestBootstrap::prepareIntegrationTest(__DIR__ . '/../sandbox/tests');
 

@@ -17,7 +17,7 @@ class MockEnvironment
 
 class_alias(MockEnvironment::class, 'Tester\Environment');
 
-require '../../src/test-bootstrap.php';
+require __DIR__ . '/../../src/test-bootstrap.php';
 TestBootstrap::prepareUnitTest($testsDir = __DIR__ . '/../sandbox/tests');
 
 //test default paths
