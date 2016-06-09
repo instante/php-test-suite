@@ -28,10 +28,15 @@ class TestBootstrap
 
     private static $prepared = FALSE;
 
-    public static function prepareUnitTest($testsDir, $rootDir = NULL, $appDir = NULL, $vendorDir = NULL)
+    /** static class, cannot be instantiated */
+    private function __construct() { }
+
+
+    public static function prepareUnitTest($testsDir = NULL)
     {
         static::checkPreparedOnce();
-        static::preparePaths($testsDir, $rootDir, $appDir, $vendorDir);
+        static::unifyConfiguration();
+        static::preparePaths($testsDir);
         require static::$vendorDir . '/autoload.php';
         Environment::setup();
 
@@ -39,29 +44,16 @@ class TestBootstrap
         static::prepareRobotLoader();
     }
 
-    /**
-     * @param string $testsDir
-     * @param string $rootDir
-     * @param string $appDir
-     * @param string $vendorDir
-     * @param string $configDir
-     * @return Container
-     */
-    public static function prepareIntegrationTest(
-        $testsDir,
-        $rootDir = NULL,
-        $appDir = NULL,
-        $vendorDir = NULL,
-        $configDir = NULL
-    ) {
+    public static function prepareIntegrationTest($testsDir = NULL)
+    {
 
-        static::prepareUnitTest($testsDir, $rootDir, $appDir, $vendorDir);
-        if ($configDir === NULL) {
-            $configDir = static::$appDir . '/config';
+        static::prepareUnitTest($testsDir);
+        if (static::$configDir === NULL) {
+            static::$configDir = static::$appDir . '/config';
         }
 
         $configurator = static::createConfigurator();
-        static::configureConfigurator($configurator, $configDir);
+        static::configureConfigurator($configurator, static::$configDir);
 
         return $configurator->createContainer();
     }
@@ -118,20 +110,30 @@ class TestBootstrap
         static::$prepared = TRUE;
     }
 
-    protected static function preparePaths($testsDir, $rootDir = NULL, $appDir = NULL, $vendorDir = NULL)
+    protected static function preparePaths($testsDir = NULL)
     {
-        if ($rootDir === NULL) {
-            $rootDir = $testsDir . '/..';
+        if ($testsDir !== NULL) {
+            static::$testsDir = $testsDir;
         }
-        if ($vendorDir === NULL) {
-            $vendorDir = $rootDir . '/vendor';
+        if (static::$testsDir === NULL) {
+            throw new InvalidStateException(__CLASS__ . '::$testsDir has to be set');
         }
-        if ($appDir === NULL) {
-            $appDir = $rootDir . '/app';
+        if (static::$rootDir === NULL) {
+            static::$rootDir = static::$testsDir . '/..';
         }
-        static::$rootDir = $rootDir;
-        static::$appDir = $appDir;
-        static::$testsDir = $testsDir;
-        static::$vendorDir = $vendorDir;
+        if (static::$vendorDir === NULL) {
+            static::$vendorDir = static::$rootDir . '/vendor';
+        }
+        if (static::$appDir === NULL) {
+            static::$appDir = static::$rootDir . '/app';
+        }
+    }
+
+    protected static function unifyConfiguration()
+    {
+        date_default_timezone_set('Europe/Prague');
+
+        $_SERVER['REQUEST_TIME'] = 1234567890;
+        $_ENV = $_GET = $_POST = [];
     }
 }
