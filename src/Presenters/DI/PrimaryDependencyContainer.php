@@ -7,6 +7,7 @@ use Instante\Tests\Presenters\Mocks\MockSession;
 use Instante\Tests\Presenters\Mocks\MockTemplateFactory;
 use Instante\Tests\Presenters\Mocks\User\MockAuthenticator;
 use Instante\Tests\Presenters\Mocks\User\MockAuthorizator;
+use Instante\Tests\Presenters\Mocks\User\MockUserStorage;
 use Instante\Tests\Presenters\Request\RequestBuilder;
 use Nette\Application\IPresenterFactory;
 use Nette\Application\IRouter;
@@ -22,7 +23,6 @@ use Nette\Http\Session;
 use Nette\Security\IAuthenticator;
 use Nette\Security\IAuthorizator;
 use Nette\Security\IUserStorage;
-use Nette\Security\SimpleAuthenticator;
 use Nette\Security\User;
 
 class PrimaryDependencyContainer
