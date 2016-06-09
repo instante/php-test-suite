@@ -31,7 +31,7 @@ class PresenterNameAutoDetector
         if (substr($classBaseName, -9) === 'Presenter') {
             return $name . substr($classBaseName, 0, -9);
         } else {
-            throw new InvalidStateException('Cannot autodetect presenter name, class is not named "XxxPresenter"');
+            throw new InvalidArgumentException('Cannot autodetect presenter name, class is not named "XxxPresenter"');
         }
     }
 }
