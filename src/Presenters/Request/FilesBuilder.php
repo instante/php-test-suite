@@ -4,12 +4,13 @@ namespace Instante\Tests\Presenters\Request;
 
 use Nette\FileNotFoundException;
 use Nette\Http\FileUpload;
+use Nette\InvalidArgumentException;
 use Nette\InvalidStateException;
 
 class FilesBuilder
 {
 
-    /** @var array */
+    /** @var array values can be one of \Nette\Http\FileUpload, string local file path or nested array */
     private $files = [];
 
     /** @var string */
@@ -25,7 +26,7 @@ class FilesBuilder
     /**
      * Adds fake uploaded file
      *
-     * @param string $key
+     * @param array|string $key - array key is used to nest files, like ['foo', 'bar'] for files['foo']['bar']
      * @param string $name original file name
      * @param string|NULL $tmpName path to tmp copy of the file; $name is copied to a temp file if tmpName is NULL
      * @param int $error upload error
@@ -33,20 +34,41 @@ class FilesBuilder
      */
     public function addFileUpload($key, $name, $tmpName = NULL, $error = UPLOAD_ERR_OK)
     {
-        $this->addFiles([$key => $this->createFileUpload($name, $tmpName, $error)]);
+        $upload = $this->createFileUpload($name, $tmpName, $error);
+        $this->insertUploadToKey($key, $upload);
         return $this;
     }
 
     /**
      * Adds fake file that failed to upload
-     * @param string $key
+     * @param array|string $key - array key is used to nest files, like ['foo', 'bar'] for files['foo']['bar']
      * @param int $error upload error
      * @return $this
      */
     public function addFailedFileUpload($key, $error = UPLOAD_ERR_NO_FILE)
     {
-        $this->addFiles([$key => $this->createFileUpload(NULL, NULL, $error)]);
+        $upload = $this->createFileUpload(NULL, NULL, $error);
+        $this->insertUploadToKey($key, $upload);
         return $this;
+    }
+
+    /**
+     * @param array|string $key
+     * @param FileUpload $upload
+     */
+    private function insertUploadToKey($key, FileUpload $upload)
+    {
+        if (!is_array($key)) {
+            $key = [$key];
+        }
+        if (count($key) === 0) {
+            throw new InvalidArgumentException('empty key');
+        }
+        $toAdd = $upload;
+        foreach (array_reverse($key) as $k) {
+            $toAdd = [$k => $toAdd];;
+        }
+        $this->addFiles($toAdd);
     }
 
     /**
