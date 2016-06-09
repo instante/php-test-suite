@@ -3,7 +3,6 @@ namespace Instante\Tests\Meta;
 
 use Instante\Tests\TestBootstrap;
 use Nette\InvalidStateException;
-use Nette\IOException;
 use Tester\Assert;
 
 class MockEnvironment
@@ -19,17 +18,14 @@ class MockEnvironment
 class_alias(MockEnvironment::class, 'Tester\Environment');
 
 require '../../src/test-bootstrap.php';
-try {
-    TestBootstrap::prepareUnitTest(__DIR__ . '/..');
-    Assert::fail('should have crashed on missing app dir');
-} catch (IOException $ex) { //expected to fail on robot loader to non-existent default app dir
-}
+TestBootstrap::prepareUnitTest($testsDir = __DIR__ . '/../sandbox/tests');
+
 //test default paths
-Assert::same(__DIR__ . '/../..', TestBootstrap::$rootDir);
-Assert::same(__DIR__ . '/../../app', TestBootstrap::$appDir);
-Assert::same(__DIR__ . '/../../vendor', TestBootstrap::$vendorDir);
-Assert::same(__DIR__ . '/..', TestBootstrap::$testsDir);
-Assert::same(__DIR__ . '/../temp', TestBootstrap::$tempDir);
+Assert::same($testsDir . '/..', TestBootstrap::$rootDir);
+Assert::same($testsDir . '/../app', TestBootstrap::$appDir);
+Assert::same($testsDir . '/../vendor', TestBootstrap::$vendorDir);
+Assert::same($testsDir, TestBootstrap::$testsDir);
+Assert::same($testsDir . '/temp', TestBootstrap::$tempDir);
 
 
 //test exception on prepared twice

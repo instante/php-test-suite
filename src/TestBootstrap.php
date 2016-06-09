@@ -2,7 +2,6 @@
 
 namespace Instante\Tests;
 
-use Nette\DI\Container;
 use Nette\InvalidStateException;
 use Tester\Environment;
 use Nette\Loaders\RobotLoader;
@@ -25,6 +24,9 @@ class TestBootstrap
 
     /** @var string nette composer directory (defaults to $rootDir/vendor) */
     public static $vendorDir;
+
+    /** @var string nette config directory (defaults to $appDir/config) */
+    public static $configDir;
 
     private static $prepared = FALSE;
 
@@ -70,9 +72,9 @@ class TestBootstrap
 
         $configurator->addConfig("$configDir/default.neon");
         if (file_exists("$configDir/local.neon")) {
-            $configurator->addConfig("$configDir/local.neon", $configurator::NONE);
+            $configurator->addConfig("$configDir/local.neon");
         }
-        $configurator->addConfig(['doctrine' => ['dbname' => '%database.dbname_test%']]);
+        $configurator->addConfig(['parameters' => ['database' => ['dbname' => '%database.dbname_test%']]]);
     }
 
     protected static function createConfigurator()
