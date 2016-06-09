@@ -23,7 +23,7 @@ class PresenterNameAutoDetector
         $name = ':';
         foreach (explode('\\', $className) as $nsPart) {
             if (substr($nsPart, -6) === 'Module') {
-                $name .= substr($nsPart, 0, -6);
+                $name .= substr($nsPart, 0, -6) . ':';
             }
         }
         $lastSlash = strrpos($className, '\\');

@@ -1,5 +1,5 @@
 <?php
-namespace Instante\Tests\Meta;
+namespace Instante\Tests\Meta\Presenters\DI;
 
 use Instante\Tests\Presenters\DI\DependencyContainer;
 use Instante\Tests\TestBootstrap;
@@ -8,7 +8,7 @@ use Tester\Assert;
 
 require '../../../bootstrap.php';
 
-class MockPresenter extends Presenter
+class MockInjectionPresenter extends Presenter
 {
     /** @inject */
     public $a;
@@ -50,7 +50,7 @@ $dc->addDependencies([
     'two' => ['d', 'e'],
 ]);
 
-$p = new MockPresenter;
+$p = new MockInjectionPresenter;
 $dc->injectTo($p);
 Assert::same('a', $p->a);
 Assert::same('b', $p->b);

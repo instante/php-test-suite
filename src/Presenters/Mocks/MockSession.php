@@ -17,7 +17,7 @@ class MockSession extends Session
     {
     }
 
-    public function getSection($section)
+    public function getSection($section, $class = 'Nette\Http\SessionSection')
     {
         if (!isset($this->sections[$section])) {
             $this->sections[$section] = new MockSessionSection;
