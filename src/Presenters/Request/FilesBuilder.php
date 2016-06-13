@@ -120,8 +120,11 @@ class FilesBuilder
             } elseif ($file instanceof FileUpload) {
                 $out[$key] = $file;
             } else {
-                throw new InvalidStateException('file uploads expects nested array of strings or FileUploads, '
-                    . (is_object($file) ? get_class($file) : gettype($file)) . ' given.');
+                throw new InvalidStateException(sprintf(
+                    'file uploads expects nested array of strings or FileUploads, %s found in %s::$files',
+                    is_object($file) ? get_class($file) : gettype($file),
+                    __CLASS__
+                ));
             }
         }
         return $out;
