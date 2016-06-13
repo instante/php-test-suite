@@ -19,11 +19,19 @@
     "require-dev": {
         "jakub-onderka/php-parallel-lint": "~0.6",
         "nette/robot-loader": "~2.2",
-        "nette/caching": "~2.2"
+        "nette/caching": "~2.2",
+        "nette/application": "~2.2",
+        "nette/security": "~2.2",
+        "nette/http": "~2.2",
+        "latte/latte": "~2.2",
+        "nette/utils": "~2.2"
     },
     "suggest": {
-        "nette/robot-loader": "~2.2",
-        "nette/caching": "~2.2"
+        "nette/robot-loader": "Allows RobotLoading classes for unit tests",
+        "nette/caching": "Enhances RobotLoader load time",
+        "nette/application": "Required for PresenterTester",
+        "nette/security": "Required for PresenterTester",
+        "nette/http": "Required for PresenterTester"
     },
     "autoload": {
         "psr-4": {

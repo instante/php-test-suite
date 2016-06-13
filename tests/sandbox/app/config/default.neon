@@ -1,0 +1,4 @@
+parameters:
+    database:
+        dbname: foo
+        dbname_test: bar
