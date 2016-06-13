@@ -28,11 +28,11 @@ class FilesBuilder
      *
      * @param array|string $key - array key is used to nest files, like ['foo', 'bar'] for files['foo']['bar']
      * @param string $name original file name
-     * @param string|NULL $tmpName path to tmp copy of the file; $name is copied to a temp file if tmpName is NULL
+     * @param string $tmpName path to tmp copy of the file; $name is copied to a temp file if tmpName is NULL
      * @param int $error upload error
      * @return $this
      */
-    public function addFileUpload($key, $name, $tmpName = NULL, $error = UPLOAD_ERR_OK)
+    public function addFileUpload($key, $name, $tmpName = '', $error = UPLOAD_ERR_OK)
     {
         $upload = $this->createFileUpload($name, $tmpName, $error);
         $this->insertUploadToKey($key, $upload);
@@ -47,7 +47,7 @@ class FilesBuilder
      */
     public function addFailedFileUpload($key, $error = UPLOAD_ERR_NO_FILE)
     {
-        $upload = $this->createFileUpload(NULL, NULL, $error);
+        $upload = $this->createFileUpload('', '', $error);
         $this->insertUploadToKey($key, $upload);
         return $this;
     }
@@ -73,20 +73,20 @@ class FilesBuilder
 
     /**
      * @param string $name original path to the file
-     * @param string|NULL $tmpName path to tmp copy of the file; $name is copied to a temp file if tmpName is NULL
+     * @param string $tmpName path to tmp copy of the file; $name is copied to a temp file if tmpName is NULL
      * @param int $error upload error
      * @return FileUpload
      * @throws FileNotFoundException
      * @throws InvalidStateException
      */
-    private function createFileUpload($name, $tmpName = NULL, $error = UPLOAD_ERR_OK)
+    private function createFileUpload($name, $tmpName = '', $error = UPLOAD_ERR_OK)
     {
         if ($error === UPLOAD_ERR_OK) {
             if (!file_exists($tmpName ?: $name)) {
                 throw new FileNotFoundException('File passed to ' . __METHOD__
                     . ' has to exist when error is UPLOAD_ERR_OK');
             }
-            if ($tmpName === NULL) {
+            if ($tmpName === '') {
                 if ($this->uploadTempDir === NULL) {
                     throw new InvalidStateException('Temp dir for uploads was not configured, cannot test uploads');
                 }
