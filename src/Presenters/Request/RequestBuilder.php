@@ -65,7 +65,7 @@ class RequestBuilder
             $this->query,
             $this->post,
             $this->filesBuilder->getFileUploads(),
-            $this->appRequestFlags
+            array_combine($this->appRequestFlags, array_fill(0, count($this->appRequestFlags), TRUE))
         );
     }
 
@@ -149,19 +149,19 @@ class RequestBuilder
      * @param array $appRequestFlags
      * @return $this
      */
-    public function setAppRequestFlags($appRequestFlags)
+    public function setAppRequestFlags(array $appRequestFlags)
     {
         $this->appRequestFlags = $appRequestFlags;
         return $this;
     }
 
     /**
-     * @param array $appRequestFlags
+     * @param array|string $appRequestFlags
      * @return $this
      */
     public function addAppRequestFlags($appRequestFlags)
     {
-        $this->appRequestFlags = $appRequestFlags + $this->appRequestFlags;
+        $this->appRequestFlags = $this->arrayize($appRequestFlags) + $this->appRequestFlags;
         return $this;
     }
 
@@ -280,5 +280,19 @@ class RequestBuilder
         $this->rawBodyCallback = $rawBodyCallback;
         return $this;
     }
+
+    /** @return FilesBuilder */
+    public function getFilesBuilder()
+    {
+        return $this->filesBuilder;
+    }
+
     //</editor-fold>
+    private function arrayize($value)
+    {
+        if (!is_array($value)) {
+            $value = [$value];
+        }
+        return $value;
+    }
 }
