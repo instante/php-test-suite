@@ -11,10 +11,10 @@ use Nette\InvalidStateException;
 
 class PresenterTester
 {
-    /** @var  Presenter */
+    /** @var Presenter */
     private $presenterCreator;
 
-    /** @var  string */
+    /** @var string */
     private $presenterName;
 
     /** @var bool when instantiated presenter is passed to constructor, this prevents tester from running it twice. */
