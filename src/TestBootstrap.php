@@ -2,6 +2,7 @@
 
 namespace Instante\Tests;
 
+use Nette\DI\Extensions\ExtensionsExtension;
 use Nette\InvalidStateException;
 use Tester\Environment;
 use Nette\Loaders\RobotLoader;

@@ -24,7 +24,9 @@
         "nette/security": "~2.2",
         "nette/http": "~2.2",
         "latte/latte": "~2.2",
-        "nette/utils": "~2.2"
+        "nette/utils": "~2.2",
+        "instante/doctrine": "~1.0",
+        "tracy/tracy": "~2.2"
     },
     "suggest": {
         "nette/robot-loader": "Allows RobotLoading classes for unit tests",
@@ -32,7 +34,9 @@
         "nette/application": "Required for PresenterTester",
         "nette/security": "Required for PresenterTester",
         "nette/http": "Required for PresenterTester",
-        "latte/latte": "Required for rendering latte templates with PresenterTester"
+        "latte/latte": "Required for rendering latte templates with PresenterTester",
+        "instante/doctrine": "for creating database tests",
+        "tracy/tracy": "needed by kdyby/events"
     },
     "autoload": {
         "psr-4": {
