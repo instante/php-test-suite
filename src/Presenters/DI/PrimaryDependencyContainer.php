@@ -69,6 +69,9 @@ class PrimaryDependencyContainer
     /** @var AppRequest */
     private $usedAppRequest;
 
+    /** @var User */
+    private $user;
+
     public function __construct(RequestBuilder $requestBuilder)
     {
         $this->requestBuilder = $requestBuilder;
@@ -105,9 +108,17 @@ class PrimaryDependencyContainer
             $this->usedHttpRequest,
             $this->httpResponse,
             $this->session,
-            new User($this->userStorage, $this->authenticator, $this->authorizator),
+            $this->getUserService(),
             $this->templateFactory
         );
+    }
+
+    public function getUserService()
+    {
+        if ($this->user === NULL) {
+            $this->user = new User($this->userStorage, $this->authenticator, $this->authorizator);
+        }
+        return $this->user;
     }
 
     /** @return IHttpRequest */

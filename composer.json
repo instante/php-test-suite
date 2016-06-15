@@ -31,7 +31,8 @@
         "nette/caching": "Enhances RobotLoader load time",
         "nette/application": "Required for PresenterTester",
         "nette/security": "Required for PresenterTester",
-        "nette/http": "Required for PresenterTester"
+        "nette/http": "Required for PresenterTester",
+        "latte/latte": "Required for rendering latte templates with PresenterTester"
     },
     "autoload": {
         "psr-4": {
