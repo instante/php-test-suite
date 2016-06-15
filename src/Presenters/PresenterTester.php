@@ -26,6 +26,9 @@ class PresenterTester
     /** @var PrimaryDependencyContainer */
     private $primaryDependencyContainer;
 
+    /** @var RequestBuilder */
+    private $requestBuilder;
+
     /**
      * @param Presenter|string|callable $presenterCreator
      * @param string|null $uploadTempDir
