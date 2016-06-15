@@ -17,12 +17,17 @@ class MockTemplate implements ITemplate
     /** @var array */
     private $called = [];
 
-    public function render()
+    public function renderToString()
     {
         if ($this->file === NULL) {
             throw new InvalidStateException('Please set a template file first');
         }
         return file_get_contents($this->file);
+    }
+
+    public function render()
+    {
+        echo $this->renderToString();
     }
 
     public function setFile($file)

@@ -28,7 +28,12 @@ Assert::exception(function () use ($t) {
 }, InvalidStateException::class, 'Please set a template file first');
 
 $t->setFile(__DIR__ . '/foo.latte');
-Assert::same('{$foo} {$bar}', trim($t->render()));
+Assert::same('{$foo} {$bar}', trim($t->renderToString()));
+
+ob_start();
+$t->render();
+Assert::same('{$foo} {$bar}', trim(ob_get_clean()));
+
 
 /** @noinspection PhpUndefinedMethodInspection */
 $t->doStuff('foo', 'bar');
