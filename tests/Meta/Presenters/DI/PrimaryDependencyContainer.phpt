@@ -8,7 +8,7 @@ use Nette\Application\UI\Presenter;
 use Nette\DI\Container;
 use Tester\Assert;
 
-require __DIR__ . '/../../../bootstrap.php';
+require __DIR__ . '/../bs-presenters.php';
 
 class MockSimplePresenter extends Presenter
 {

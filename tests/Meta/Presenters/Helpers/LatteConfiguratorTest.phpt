@@ -8,7 +8,7 @@ use Nette;
 use Nette\Application\UI\Presenter;
 use Tester\Assert;
 
-require __DIR__ . '/../../../bootstrap.php';
+require __DIR__ . '/../bs-presenters.php';
 SandboxTestBootstrap::prepareUnitTest();
 
 class LatteTestPresenter extends Presenter

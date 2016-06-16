@@ -7,7 +7,7 @@ use Nette\Security\Identity;
 use Nette\Security\IUserStorage;
 use Tester\Assert;
 
-require __DIR__ . '/../../../../bootstrap.php';
+require __DIR__ . '/../../bs-presenters.php';
 
 SandboxTestBootstrap::prepareUnitTest();
 

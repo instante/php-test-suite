@@ -7,7 +7,7 @@ use Nette\Application\UI\Presenter;
 use Nette\InvalidArgumentException;
 use Tester\Assert;
 
-require __DIR__ . '/../../../bootstrap.php';
+require __DIR__ . '/../bs-presenters.php';
 
 class FooPresenter extends Presenter
 {

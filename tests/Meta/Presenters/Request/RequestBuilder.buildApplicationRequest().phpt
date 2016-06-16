@@ -6,7 +6,7 @@ use Instante\Tests\Meta\SandboxTestBootstrap;
 use Nette\Http\Request;
 use Tester\Assert;
 
-require __DIR__ . '/../../../bootstrap.php';
+require __DIR__ . '/../bs-presenters.php';
 
 SandboxTestBootstrap::prepareUnitTest();
 

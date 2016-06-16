@@ -8,7 +8,7 @@ use Nette\Http\Request;
 use Nette\NotSupportedException;
 use Tester\Assert;
 
-require __DIR__ . '/../../../bootstrap.php';
+require __DIR__ . '/../bs-presenters.php';
 
 SandboxTestBootstrap::prepareUnitTest();
 

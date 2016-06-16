@@ -5,7 +5,7 @@ use Instante\Tests\Presenters\Mocks\MockSessionSection;
 use Instante\Tests\Meta\SandboxTestBootstrap;
 use Tester\Assert;
 
-require __DIR__ . '/../../../bootstrap.php';
+require __DIR__ . '/../bs-presenters.php';
 
 SandboxTestBootstrap::prepareUnitTest();
 

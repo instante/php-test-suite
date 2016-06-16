@@ -7,7 +7,7 @@ use Nette\FileNotFoundException;
 use Nette\Http\FileUpload;
 use Tester\Assert;
 
-require __DIR__ . '/../../../bootstrap.php';
+require __DIR__ . '/../bs-presenters.php';
 
 SandboxTestBootstrap::prepareUnitTest();
 

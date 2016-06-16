@@ -6,16 +6,13 @@ use Instante\Tests\Meta\SandboxTestBootstrap;
 use Latte\Engine;
 use Latte\Loaders\StringLoader;
 use Nette;
-use Nette\Application\IResponse;
 use Nette\Application\UI\ITemplate;
 use Nette\Bridges\ApplicationLatte\Template;
 use Nette\Application\UI\Presenter;
 use Tester\Assert;
 use Tester\TestCase;
 
-require __DIR__ . '/../../bootstrap.php';
-SandboxTestBootstrap::prepareUnitTest();
-
+require __DIR__ . '/bs-presenters.php';
 
 class PresenterTesterTest extends TestCase
 {
