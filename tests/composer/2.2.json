@@ -4,6 +4,11 @@
     },
     "require-dev": {
         "nette/robot-loader": "2.2.*",
-        "nette/caching": "2.2.*"
+        "nette/caching": "2.2.*",
+        "nette/application": "2.2.*",
+        "nette/security": "2.2.*",
+        "nette/http": "2.2.*",
+        "latte/latte": "2.2.*",
+        "nette/utils": "2.2.*"
     }
 }
