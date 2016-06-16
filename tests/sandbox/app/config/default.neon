@@ -8,3 +8,6 @@ parameters:
         user: travis
         password: ''
         dbname: php_test_suite_test
+
+extensions:
+    console: Kdyby\Console\DI\ConsoleExtension
