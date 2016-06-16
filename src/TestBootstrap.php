@@ -80,6 +80,14 @@ class TestBootstrap
     protected static function createConfigurator()
     {
         $configurator = new Configurator;
+        foreach ($configurator->defaultExtensions as $name => $class) { // remove extensions from not installed packages
+            if (is_array($class)) {
+                $class = $class[0];
+            }
+            if (!class_exists($class)) {
+                unset($configurator->defaultExtensions[$name]);
+            }
+        }
         $configurator->setTempDirectory(static::$tempDir);
         return $configurator;
     }
