@@ -3,13 +3,19 @@
 namespace Instante\Tests\Meta\Doctrine;
 
 use Instante\Tests\Doctrine\DoctrineTester;
+use Instante\Tests\Meta\DoctrineTestBootstrap;
 use Instante\Tests\Sandbox\SampleEntity;
-use Instante\Tests\Meta\SandboxTestBootstrap;
 use Kdyby\Doctrine\EntityManager;
 use Tester\Assert;
+use Tester\Environment;
 
 require __DIR__ . '/../../bootstrap.php';
-$context = SandboxTestBootstrap::prepareIntegrationTest();
+
+if (!class_exists(EntityManager::class)) {
+    Environment::skip('Install nette/application to enable presenter tests.');
+}
+
+$context = DoctrineTestBootstrap::prepareIntegrationTest();
 
 $doctrineTester = DoctrineTester::createFromContainer($context);
 

@@ -8,21 +8,3 @@ parameters:
         user: travis
         password: ''
         dbname: php_test_suite_test
-
-extensions:
-    annotations: Kdyby\Annotations\DI\AnnotationsExtension
-    console: Kdyby\Console\DI\ConsoleExtension
-    events: Kdyby\Events\DI\EventsExtension
-    doctrine: Kdyby\Doctrine\DI\OrmExtension
-    migrations: Instante\Doctrine\DI\MigrationsExtension
-
-doctrine:
-    driver: pdo_mysql
-    host: %doctrineTestDb.host%
-    dbname: %doctrineTestDb.dbname%
-    user: %doctrineTestDb.user%
-    password: %doctrineTestDb.password%
-    charset: utf8
-
-migrations:
-    directory: "%paths.root%/migrations"
