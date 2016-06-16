@@ -17,7 +17,7 @@ $doctrineTester->prepareDatabaseTest();
 
 /** @var EntityManager $em */
 $em = $context->getByType(EntityManager::class);
-Assert::same(0, $em->getRepository(SampleEntity::class)->countBy());
+Assert::same(0, (int)$em->getRepository(SampleEntity::class)->countBy());
 $em->persist(new SampleEntity('foo'));
 $em->flush();
-Assert::same(1, $em->getRepository(SampleEntity::class)->countBy());
+Assert::same(1, (int)$em->getRepository(SampleEntity::class)->countBy());

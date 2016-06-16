@@ -4,6 +4,8 @@ namespace Instante\Tests\Presenters\DI;
 
 use Nette\Application\UI\Presenter;
 use Nette\DI\Extensions\InjectExtension;
+use Nette\DI\Helpers;
+use Nette\Reflection\ClassType;
 
 class DependencyContainer
 {
@@ -24,8 +26,12 @@ class DependencyContainer
 
     private function injectByProperties(Presenter $presenter)
     {
-        /** @noinspection PhpInternalEntityUsedInspection */
-        $properties = InjectExtension::getInjectProperties(get_class($presenter));
+        if (class_exists(InjectExtension::class)) {
+            /** @noinspection PhpInternalEntityUsedInspection */
+            $properties = InjectExtension::getInjectProperties(get_class($presenter));  // Nette 2.3+
+        } else {
+            $properties = Helpers::getInjectProperties(new ClassType($presenter));  // Nette 2.2
+        }
         foreach ($properties as $property => $type) {
             if (isset($this->dependencies['@' . $property])) {
 
@@ -41,8 +47,17 @@ class DependencyContainer
      */
     private function injectByMethods(Presenter $presenter)
     {
-        /** @noinspection PhpInternalEntityUsedInspection */
-        $methods = InjectExtension::getInjectMethods($presenter);
+        if (class_exists(InjectExtension::class)) {
+            /** @noinspection PhpInternalEntityUsedInspection */
+            $methods = InjectExtension::getInjectMethods($presenter);  // Nette 2.3+
+        } else {
+            $methods = [];
+            foreach (get_class_methods($presenter) as $method) {
+                if (substr($method, 0, 6) === 'inject') {
+                    $methods[] = $method;
+                }
+            }
+        }
         unset($methods['injectPrimary']);
         foreach (array_reverse($methods) as $method) {
             $injectName = lcfirst(substr($method, 6));

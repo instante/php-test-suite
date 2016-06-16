@@ -14,8 +14,11 @@ $rb->addAppRequestFlags(Request::SECURED)
     ->setPost(['fooPost' => 'barP'])
     ->setQuery(['fooQuery' => 'barQ'])
     ->setRemoteAddress('remoteAddr')
-    ->setRemoteHost('remoteHost')
-    ->setRawBodyCallback(function () { return 'a'; });
+    ->setRemoteHost('remoteHost');
+
+if (RequestBuilder::isSupportedRawBodyCallback()) {
+    $rb->setRawBodyCallback(function () { return 'a'; });
+}
 
 $rb->getFilesBuilder()
     ->addFailedFileUpload('fooFile');

@@ -1,0 +1,8 @@
+{
+    "require": {
+        "nette/bootstrap": "2.2.*"
+    },
+    "require-dev": {
+        "nette/nette": "2.2.*"
+    }
+}

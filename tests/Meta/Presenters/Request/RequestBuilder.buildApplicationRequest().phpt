@@ -16,6 +16,6 @@ $ar = $rb->buildApplicationRequest();
 
 Assert::false($ar->getFiles()['fooFile']->isOk());
 Assert::same(Request::POST, $ar->getMethod());
-Assert::same('barQ', $ar->getParameter('fooQuery'));
-Assert::same('barP', $ar->getPost('fooPost'));
+Assert::same('barQ', $ar->getParameters()['fooQuery']);
+Assert::same('barP', $ar->getPost()['fooPost']);
 Assert::same('Foo', $ar->getPresenterName());

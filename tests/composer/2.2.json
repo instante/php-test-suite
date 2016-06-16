@@ -1,14 +1,20 @@
 {
     "require": {
-        "nette/bootstrap": "2.2.*"
+        "~CLEAR": [
+            "nette/bootstrap"
+        ]
     },
     "require-dev": {
-        "nette/robot-loader": "2.2.*",
-        "nette/caching": "2.2.*",
-        "nette/application": "2.2.*",
-        "nette/security": "2.2.*",
-        "nette/http": "2.2.*",
-        "latte/latte": "2.2.*",
-        "nette/utils": "2.2.*"
+        "~CLEAR": [
+            "nette/robot-loader",
+            "nette/caching",
+            "nette/application",
+            "nette/security",
+            "nette/http",
+            "latte/latte",
+            "nette/utils",
+            "tracy/tracy"
+        ],
+        "nette/nette": "2.2.*"
     }
 }

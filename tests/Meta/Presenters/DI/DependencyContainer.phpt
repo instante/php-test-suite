@@ -10,13 +10,13 @@ require __DIR__ . '/../../../bootstrap.php';
 
 class MockInjectionPresenter extends Presenter
 {
-    /** @inject */
+    /** @var \stdClass @inject */
     public $a;
 
-    /** @inject */
+    /** @var \stdClass @inject */
     public $b;
 
-    /** @inject */
+    /** @var \stdClass @inject */
     public $notSatisfied;
 
     public $cc;
