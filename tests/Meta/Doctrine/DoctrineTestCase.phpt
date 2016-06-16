@@ -2,13 +2,9 @@
 
 namespace Instante\Tests\Meta\Doctrine;
 
-use Doctrine\DBAL\Migrations\Configuration\Configuration;
 use Instante\Tests\Doctrine\DoctrineTestCase;
 use Instante\Tests\Doctrine\DoctrineTester;
-use Instante\Tests\Meta\DoctrineTestBootstrap;
-use Instante\Tests\Sandbox\SampleEntity;
 use Kdyby\Doctrine\EntityManager;
-use Nette\DI\Container;
 use Tester\Assert;
 use Tester\Environment;
 
@@ -20,7 +16,6 @@ if (!class_exists(EntityManager::class)) {
 
 require __DIR__ . '/DoctrineTestBootstrap.php';
 
-$context = DoctrineTestBootstrap::prepareIntegrationTest();
 
 class DummyEntityManager extends EntityManager
 {
