@@ -15,6 +15,8 @@ if (!class_exists(EntityManager::class)) {
     Environment::skip('Install nette/application to enable presenter tests.');
 }
 
+require __DIR__ . '/DoctrineTestBootstrap.php';
+
 $context = DoctrineTestBootstrap::prepareIntegrationTest();
 
 $doctrineTester = DoctrineTester::createFromContainer($context);

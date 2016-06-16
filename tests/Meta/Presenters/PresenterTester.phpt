@@ -14,6 +14,8 @@ use Tester\TestCase;
 
 require __DIR__ . '/bs-presenters.php';
 
+SandboxTestBootstrap::prepareUnitTest();
+
 class PresenterTesterTest extends TestCase
 {
     public function testConstructor()
