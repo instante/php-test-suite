@@ -13,7 +13,7 @@ class TestBootstrap
     /** @var string tests directory */
     public static $testsDir;
 
-    /** @var string temp directory for tests (always $testsDir/temp) */
+    /** @var string temp directory for tests (defaults to $testsDir/temp) */
     public static $tempDir;
 
     /** @var string project root directory (defaults to $testsDir/..) */
@@ -133,6 +133,9 @@ class TestBootstrap
         }
         if (static::$appDir === NULL) {
             static::$appDir = static::$rootDir . '/app';
+        }
+        if (static::$tempDir === NULL) {
+            static::$tempDir = static::$testsDir . '/temp';
         }
     }
 
