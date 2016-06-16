@@ -105,7 +105,6 @@ class TestBootstrap
 
     protected static function prepareTempDir()
     {
-        static::$tempDir = static::$testsDir . '/temp';
         @mkdir(static::$tempDir . '/cache', 0777, TRUE); // @ - dir may already exist
     }
 
