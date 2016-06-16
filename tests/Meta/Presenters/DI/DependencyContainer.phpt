@@ -2,21 +2,21 @@
 namespace Instante\Tests\Meta\Presenters\DI;
 
 use Instante\Tests\Presenters\DI\DependencyContainer;
-use Instante\Tests\TestBootstrap;
+use Instante\Tests\Meta\SandboxTestBootstrap;
 use Nette\Application\UI\Presenter;
 use Tester\Assert;
 
-require __DIR__ . '/../../../bootstrap.php';
+require __DIR__ . '/../bs-presenters.php';
 
 class MockInjectionPresenter extends Presenter
 {
-    /** @inject */
+    /** @var \stdClass @inject */
     public $a;
 
-    /** @inject */
+    /** @var \stdClass @inject */
     public $b;
 
-    /** @inject */
+    /** @var \stdClass @inject */
     public $notSatisfied;
 
     public $cc;
@@ -37,7 +37,7 @@ class MockInjectionPresenter extends Presenter
     }
 }
 
-TestBootstrap::prepareUnitTest();
+SandboxTestBootstrap::prepareUnitTest();
 
 $dc = new DependencyContainer;
 $dc->addDependencies([

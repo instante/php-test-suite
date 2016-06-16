@@ -2,41 +2,40 @@
 namespace Instante\Tests\Meta\Presenters;
 
 use Instante\Tests\Presenters\PresenterTester;
-use Instante\Tests\TestBootstrap;
+use Instante\Tests\Meta\SandboxTestBootstrap;
 use Latte\Engine;
 use Latte\Loaders\StringLoader;
 use Nette;
-use Nette\Application\IResponse;
 use Nette\Application\UI\ITemplate;
 use Nette\Bridges\ApplicationLatte\Template;
 use Nette\Application\UI\Presenter;
 use Tester\Assert;
 use Tester\TestCase;
 
-require __DIR__ . '/../../bootstrap.php';
-TestBootstrap::prepareUnitTest();
+require __DIR__ . '/bs-presenters.php';
 
+SandboxTestBootstrap::prepareUnitTest();
 
 class PresenterTesterTest extends TestCase
 {
     public function testConstructor()
     {
-        new PresenterTester('Instante\Tests\Presenters\TestPresenter', TestBootstrap::$tempDir);
-        new PresenterTester(new TestPresenter, TestBootstrap::$tempDir);
-        new PresenterTester(function () { return new TestPresenter; }, TestBootstrap::$tempDir);
+        new PresenterTester('Instante\Tests\Presenters\TestPresenter', SandboxTestBootstrap::$tempDir);
+        new PresenterTester(new TestPresenter, SandboxTestBootstrap::$tempDir);
+        new PresenterTester(function () { return new TestPresenter; }, SandboxTestBootstrap::$tempDir);
         Assert::true(TRUE, 'Passing this test indicates that PresenterTester constructor accepts all desired argument types.');
     }
 
     public function testBasicTest()
     {
-        $tester = new PresenterTester(new TestPresenter, TestBootstrap::$tempDir);
+        $tester = new PresenterTester(new TestPresenter, SandboxTestBootstrap::$tempDir);
         $result = $tester->runPresenter();
         Assert::same('Hello world', $result->getResponseBody(), 'Basic presenter execution');
     }
 
     public function testInjectDependencies()
     {
-        $tester = new PresenterTester(new TestInjectPresenter, TestBootstrap::$tempDir);
+        $tester = new PresenterTester(new TestInjectPresenter, SandboxTestBootstrap::$tempDir);
         $dc = $tester->getDependencyContainer();
         $dc->addDependencies([
             'foo' => new Foo(1),
@@ -59,17 +58,17 @@ class PresenterTesterTest extends TestCase
 
     public function testCheckInstanceUsedOnce()
     {
-        $tester = new PresenterTester(new TestPresenter, TestBootstrap::$tempDir);
+        $tester = new PresenterTester(new TestPresenter, SandboxTestBootstrap::$tempDir);
         $tester->runPresenter();
         Assert::exception(function () use ($tester) {
             $tester->runPresenter();
         }, 'Nette\InvalidStateException');
 
         //should not fail - presenter passed by class or factory method can be used multiple times
-        $tester = new PresenterTester(TestPresenter::class, TestBootstrap::$tempDir);
+        $tester = new PresenterTester(TestPresenter::class, SandboxTestBootstrap::$tempDir);
         $tester->runPresenter();
         $tester->runPresenter();
-        $tester = new PresenterTester(function () { return new TestPresenter; }, TestBootstrap::$tempDir);
+        $tester = new PresenterTester(function () { return new TestPresenter; }, SandboxTestBootstrap::$tempDir);
         $tester->runPresenter();
         $tester->runPresenter();
     }

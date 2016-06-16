@@ -1,5 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../vendor/autoload.php';
-\Instante\Tests\TestBootstrap::$testsDir = __DIR__;
-\Instante\Tests\TestBootstrap::$rootDir = __DIR__ . '/sandbox';
+require_once __DIR__ . '/Meta/SandboxTestBootstrap.php';
+Instante\Tests\TestBootstrap::$testsDir = __DIR__;
+Instante\Tests\TestBootstrap::$rootDir = __DIR__ . '/sandbox';
+Instante\Tests\TestBootstrap::$tempDir = __DIR__ . '/temp';

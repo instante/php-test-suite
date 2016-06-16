@@ -2,12 +2,12 @@
 namespace Instante\Tests\Meta\Presenters\Mocks;
 
 use Instante\Tests\Presenters\Mocks\MockSessionSection;
-use Instante\Tests\TestBootstrap;
+use Instante\Tests\Meta\SandboxTestBootstrap;
 use Tester\Assert;
 
-require __DIR__ . '/../../../bootstrap.php';
+require __DIR__ . '/../bs-presenters.php';
 
-TestBootstrap::prepareUnitTest();
+SandboxTestBootstrap::prepareUnitTest();
 
 //only getSection and hasSection are implemented
 

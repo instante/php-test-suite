@@ -18,6 +18,8 @@ class MockEnvironment
 class_alias(MockEnvironment::class, 'Tester\Environment');
 
 require __DIR__ . '/../../src/test-bootstrap.php';
+
+TestBootstrap::$tempDir = __DIR__ . '/../temp';
 TestBootstrap::prepareUnitTest($testsDir = __DIR__ . '/../sandbox/tests');
 
 //test default paths
@@ -25,7 +27,6 @@ Assert::same($testsDir . '/..', TestBootstrap::$rootDir);
 Assert::same($testsDir . '/../app', TestBootstrap::$appDir);
 Assert::same($testsDir . '/../vendor', TestBootstrap::$vendorDir);
 Assert::same($testsDir, TestBootstrap::$testsDir);
-Assert::same($testsDir . '/temp', TestBootstrap::$tempDir);
 
 
 //test exception on prepared twice

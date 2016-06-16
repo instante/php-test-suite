@@ -13,7 +13,7 @@ class TestBootstrap
     /** @var string tests directory */
     public static $testsDir;
 
-    /** @var string temp directory for tests (always $testsDir/temp) */
+    /** @var string temp directory for tests (defaults to $testsDir/temp) */
     public static $tempDir;
 
     /** @var string project root directory (defaults to $testsDir/..) */
@@ -28,7 +28,7 @@ class TestBootstrap
     /** @var string nette config directory (defaults to $appDir/config) */
     public static $configDir;
 
-    private static $prepared = FALSE;
+    protected static $prepared = FALSE;
 
     /** static class, cannot be instantiated */
     private function __construct() { }
@@ -80,6 +80,14 @@ class TestBootstrap
     protected static function createConfigurator()
     {
         $configurator = new Configurator;
+        foreach ($configurator->defaultExtensions as $name => $class) { // remove extensions from not installed packages
+            if (is_array($class)) {
+                $class = $class[0];
+            }
+            if (!class_exists($class)) {
+                unset($configurator->defaultExtensions[$name]);
+            }
+        }
         $configurator->setTempDirectory(static::$tempDir);
         return $configurator;
     }
@@ -91,16 +99,20 @@ class TestBootstrap
             if (class_exists(FileStorage::class)) {
                 $loader->setCacheStorage(new FileStorage(static::$tempDir));
             }
-            $loader
-                ->addDirectory(static::$appDir)
-                ->addDirectory(static::$testsDir)
-                ->register();
+            static::addRobotLoaderPaths($loader);
+            $loader->register();
         }
+    }
+
+    protected static function addRobotLoaderPaths(RobotLoader $loader)
+    {
+        $loader
+            ->addDirectory(static::$appDir)
+            ->addDirectory(static::$testsDir);
     }
 
     protected static function prepareTempDir()
     {
-        static::$tempDir = static::$testsDir . '/temp';
         @mkdir(static::$tempDir . '/cache', 0777, TRUE); // @ - dir may already exist
     }
 
@@ -128,6 +140,9 @@ class TestBootstrap
         }
         if (static::$appDir === NULL) {
             static::$appDir = static::$rootDir . '/app';
+        }
+        if (static::$tempDir === NULL) {
+            static::$tempDir = static::$testsDir . '/temp';
         }
     }
 

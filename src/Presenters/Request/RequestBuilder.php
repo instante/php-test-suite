@@ -7,6 +7,8 @@ use Nette\Application\Request as AppRequest;
 use Nette\Http\Request as HttpRequest;
 use Nette\Http\Url;
 use Nette\Http\UrlScript;
+use Nette\NotSupportedException;
+use Nette\Reflection\ClassType;
 
 class RequestBuilder
 {
@@ -41,7 +43,7 @@ class RequestBuilder
     private $remoteHost = 'localhost';
 
     /** @var callable|NULL */
-    private $rawBodyCallback = NULL;
+    private $rawBodyCallback;
 
     /**
      * @param string $presenterName
@@ -65,7 +67,8 @@ class RequestBuilder
             $this->query,
             $this->post,
             $this->filesBuilder->getFileUploads(),
-            array_combine($this->appRequestFlags, array_fill(0, count($this->appRequestFlags), TRUE))
+            count($this->appRequestFlags) ?
+                array_combine($this->appRequestFlags, array_fill(0, count($this->appRequestFlags), TRUE)) : []
         );
     }
 
@@ -277,6 +280,10 @@ class RequestBuilder
      */
     public function setRawBodyCallback(callable $rawBodyCallback = NULL)
     {
+        if (!self::isSupportedRawBodyCallback()) {
+            // check for 2.3 version
+            throw new NotSupportedException('Usage of Nette\Http\Request::$rawBodyCallback needs Nette >= 2.3');
+        }
         $this->rawBodyCallback = $rawBodyCallback;
         return $this;
     }
@@ -294,5 +301,10 @@ class RequestBuilder
             $value = [$value];
         }
         return $value;
+    }
+
+    public static function isSupportedRawBodyCallback()
+    {
+        return (new ClassType(HttpRequest::class))->hasProperty('rawBodyCallback');
     }
 }

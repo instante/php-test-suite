@@ -3,14 +3,14 @@ namespace Instante\Tests\Meta\Presenters\Mocks;
 
 use Instante\Tests\Presenters\Mocks\MockTemplate;
 use Instante\Tests\Presenters\Mocks\MockTemplateFactory;
-use Instante\Tests\TestBootstrap;
+use Instante\Tests\Meta\SandboxTestBootstrap;
 use Nette\InvalidArgumentException;
 use Nette\InvalidStateException;
 use Tester\Assert;
 
-require __DIR__ . '/../../../bootstrap.php';
+require __DIR__ . '/../bs-presenters.php';
 
-TestBootstrap::prepareUnitTest();
+SandboxTestBootstrap::prepareUnitTest();
 
 $mtf = new MockTemplateFactory();
 $t = $mtf->createTemplate();

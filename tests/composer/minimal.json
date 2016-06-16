@@ -2,7 +2,13 @@
     "require-dev": {
         "~CLEAR": [
             "nette/robot-loader",
-            "nette/caching"
+            "nette/caching",
+            "nette/application",
+            "nette/security",
+            "nette/http",
+            "latte/latte",
+            "nette/utils",
+            "instante/doctrine"
         ]
     }
 }
