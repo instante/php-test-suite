@@ -65,7 +65,8 @@ class RequestBuilder
             $this->query,
             $this->post,
             $this->filesBuilder->getFileUploads(),
-            array_combine($this->appRequestFlags, array_fill(0, count($this->appRequestFlags), TRUE))
+            count($this->appRequestFlags) ?
+                array_combine($this->appRequestFlags, array_fill(0, count($this->appRequestFlags), TRUE)) : []
         );
     }
 
