@@ -7,6 +7,7 @@ use Tester\Assert;
 
 require __DIR__ . '/../../src/test-bootstrap.php';
 
+TestBootstrap::$tempDir = __DIR__ . '/../temp';
 $container = TestBootstrap::prepareIntegrationTest(__DIR__ . '/../sandbox/tests');
 
 Assert::type(Container::class, $container, 'container created');
