@@ -3,13 +3,13 @@ namespace Instante\Tests\Meta\Presenters;
 
 use Instante\Tests\Presenters\Helpers\LatteConfigurator;
 use Instante\Tests\Presenters\PresenterTester;
-use Instante\Tests\TestBootstrap;
+use Instante\Tests\Meta\SandboxTestBootstrap;
 use Nette;
 use Nette\Application\UI\Presenter;
 use Tester\Assert;
 
 require __DIR__ . '/../../../bootstrap.php';
-TestBootstrap::prepareUnitTest();
+SandboxTestBootstrap::prepareUnitTest();
 
 class LatteTestPresenter extends Presenter
 {
@@ -19,7 +19,7 @@ class LatteTestPresenter extends Presenter
     }
 }
 
-$pt = new PresenterTester(new LatteTestPresenter, TestBootstrap::$tempDir, 'Homepage');
+$pt = new PresenterTester(new LatteTestPresenter, SandboxTestBootstrap::$tempDir, 'Homepage');
 LatteConfigurator::configureTester($pt);
 
 $result = $pt->runPresenter();

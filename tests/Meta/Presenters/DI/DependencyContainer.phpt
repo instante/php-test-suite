@@ -2,7 +2,7 @@
 namespace Instante\Tests\Meta\Presenters\DI;
 
 use Instante\Tests\Presenters\DI\DependencyContainer;
-use Instante\Tests\TestBootstrap;
+use Instante\Tests\Meta\SandboxTestBootstrap;
 use Nette\Application\UI\Presenter;
 use Tester\Assert;
 
@@ -37,7 +37,7 @@ class MockInjectionPresenter extends Presenter
     }
 }
 
-TestBootstrap::prepareUnitTest();
+SandboxTestBootstrap::prepareUnitTest();
 
 $dc = new DependencyContainer;
 $dc->addDependencies([

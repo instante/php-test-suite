@@ -2,13 +2,13 @@
 namespace Instante\Tests\Meta\Presenters\Mocks;
 
 use Instante\Tests\Presenters\Mocks\MockPresenterFactory;
-use Instante\Tests\TestBootstrap;
+use Instante\Tests\Meta\SandboxTestBootstrap;
 use Nette\Application\UI\InvalidLinkException;
 use Tester\Assert;
 
 require __DIR__ . '/../../../bootstrap.php';
 
-TestBootstrap::prepareUnitTest();
+SandboxTestBootstrap::prepareUnitTest();
 
 $mus = new MockPresenterFactory;
 

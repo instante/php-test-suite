@@ -3,7 +3,7 @@ namespace Instante\Tests\Meta\Presenters\DI;
 
 use Instante\Tests\Presenters\DI\PrimaryDependencyContainer;
 use Instante\Tests\Presenters\Request\RequestBuilder;
-use Instante\Tests\TestBootstrap;
+use Instante\Tests\Meta\SandboxTestBootstrap;
 use Nette\Application\UI\Presenter;
 use Nette\DI\Container;
 use Tester\Assert;
@@ -14,9 +14,9 @@ class MockSimplePresenter extends Presenter
 {
 }
 
-TestBootstrap::prepareUnitTest();
+SandboxTestBootstrap::prepareUnitTest();
 
-$rb = new RequestBuilder('Foo', TestBootstrap::$tempDir . '/uploads');
+$rb = new RequestBuilder('Foo', SandboxTestBootstrap::$tempDir . '/uploads');
 $pdc = new PrimaryDependencyContainer($rb);
 $pdc->setContext($context = new Container);
 

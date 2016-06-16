@@ -2,13 +2,13 @@
 namespace Instante\Tests\Meta\Presenters\Helpers;
 
 use Instante\Tests\Presenters\Helpers\PresenterNameAutoDetector;
-use Instante\Tests\TestBootstrap;
+use Instante\Tests\Meta\SandboxTestBootstrap;
 use Nette\InvalidArgumentException;
 use Tester\Assert;
 
 require __DIR__ . '/../../../bootstrap.php';
 
-TestBootstrap::prepareUnitTest();
+SandboxTestBootstrap::prepareUnitTest();
 
 Assert::same(':Foo', PresenterNameAutoDetector::autoDetect('FooPresenter'));
 Assert::same(':Foo', PresenterNameAutoDetector::autoDetect('Foo\Bar\Baz\FooPresenter'));

@@ -3,10 +3,10 @@
 namespace Instante\Tests\Meta\Presenters\Request;
 
 use Instante\Tests\Presenters\Request\RequestBuilder;
-use Instante\Tests\TestBootstrap;
+use Instante\Tests\Meta\SandboxTestBootstrap;
 use Nette\Application\Request;
 
-$rb = new RequestBuilder('Foo', TestBootstrap::$tempDir);
+$rb = new RequestBuilder('Foo', SandboxTestBootstrap::$tempDir);
 $rb->addAppRequestFlags(Request::SECURED)
     ->setCookies(['fooCookie' => 'barC'])
     ->setHeaders(['fooHeader' => 'barH'])

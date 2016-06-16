@@ -2,7 +2,6 @@
 
 namespace Instante\Tests;
 
-use Nette\DI\Extensions\ExtensionsExtension;
 use Nette\InvalidStateException;
 use Tester\Environment;
 use Nette\Loaders\RobotLoader;
@@ -29,7 +28,7 @@ class TestBootstrap
     /** @var string nette config directory (defaults to $appDir/config) */
     public static $configDir;
 
-    private static $prepared = FALSE;
+    protected static $prepared = FALSE;
 
     /** static class, cannot be instantiated */
     private function __construct() { }
@@ -92,11 +91,16 @@ class TestBootstrap
             if (class_exists(FileStorage::class)) {
                 $loader->setCacheStorage(new FileStorage(static::$tempDir));
             }
-            $loader
-                ->addDirectory(static::$appDir)
-                ->addDirectory(static::$testsDir)
-                ->register();
+            static::addRobotLoaderPaths($loader);
+            $loader->register();
         }
+    }
+
+    protected static function addRobotLoaderPaths(RobotLoader $loader)
+    {
+        $loader
+            ->addDirectory(static::$appDir)
+            ->addDirectory(static::$testsDir);
     }
 
     protected static function prepareTempDir()

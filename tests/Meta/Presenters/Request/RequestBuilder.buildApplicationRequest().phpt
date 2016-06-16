@@ -2,13 +2,13 @@
 namespace Instante\Tests\Meta\Presenters\Request;
 
 use Instante\Tests\Presenters\Request\RequestBuilder;
-use Instante\Tests\TestBootstrap;
+use Instante\Tests\Meta\SandboxTestBootstrap;
 use Nette\Http\Request;
 use Tester\Assert;
 
 require __DIR__ . '/../../../bootstrap.php';
 
-TestBootstrap::prepareUnitTest();
+SandboxTestBootstrap::prepareUnitTest();
 
 /** @var RequestBuilder $rb */
 $rb = require __DIR__ . '/RequestBuilder.create.inc';

@@ -4,12 +4,12 @@ namespace Instante\Tests\Meta\Doctrine;
 
 use Instante\Tests\Doctrine\DoctrineTester;
 use Instante\Tests\Sandbox\SampleEntity;
-use Instante\Tests\TestBootstrap;
+use Instante\Tests\Meta\SandboxTestBootstrap;
 use Kdyby\Doctrine\EntityManager;
 use Tester\Assert;
 
 require __DIR__ . '/../../bootstrap.php';
-$context = TestBootstrap::prepareIntegrationTest();
+$context = SandboxTestBootstrap::prepareIntegrationTest();
 
 $doctrineTester = DoctrineTester::createFromContainer($context);
 

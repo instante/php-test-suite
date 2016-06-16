@@ -2,7 +2,7 @@
 namespace Instante\Tests\Meta\Presenters\Request;
 
 use Instante\Tests\Presenters\Request\FilesBuilder;
-use Instante\Tests\TestBootstrap;
+use Instante\Tests\Meta\SandboxTestBootstrap;
 use Nette\FileNotFoundException;
 use Nette\InvalidArgumentException;
 use Nette\InvalidStateException;
@@ -10,9 +10,9 @@ use Tester\Assert;
 
 require __DIR__ . '/../../../bootstrap.php';
 
-TestBootstrap::prepareUnitTest();
+SandboxTestBootstrap::prepareUnitTest();
 
-$fb = new FilesBuilder(TestBootstrap::$tempDir . '/uploads');
+$fb = new FilesBuilder(SandboxTestBootstrap::$tempDir . '/uploads');
 
 Assert::exception(function () use ($fb) {
     $fb->setFiles([TRUE]);

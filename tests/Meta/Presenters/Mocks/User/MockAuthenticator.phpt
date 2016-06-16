@@ -2,7 +2,7 @@
 namespace Instante\Tests\Meta\Presenters\Mocks\User;
 
 use Instante\Tests\Presenters\Mocks\User\MockAuthenticator;
-use Instante\Tests\TestBootstrap;
+use Instante\Tests\Meta\SandboxTestBootstrap;
 use Nette\Security\AuthenticationException;
 use Nette\Security\IAuthenticator;
 use Nette\Security\IIdentity;
@@ -10,7 +10,7 @@ use Tester\Assert;
 
 require __DIR__ . '/../../../../bootstrap.php';
 
-TestBootstrap::prepareUnitTest();
+SandboxTestBootstrap::prepareUnitTest();
 
 class MockMooIdentity implements IIdentity
 {

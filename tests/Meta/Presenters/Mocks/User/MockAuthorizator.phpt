@@ -2,12 +2,12 @@
 namespace Instante\Tests\Meta\Presenters\Mocks\User;
 
 use Instante\Tests\Presenters\Mocks\User\MockAuthorizator;
-use Instante\Tests\TestBootstrap;
+use Instante\Tests\Meta\SandboxTestBootstrap;
 use Tester\Assert;
 
 require __DIR__ . '/../../../../bootstrap.php';
 
-TestBootstrap::prepareUnitTest();
+SandboxTestBootstrap::prepareUnitTest();
 
 $ma = new MockAuthorizator;
 $ma->acl = [

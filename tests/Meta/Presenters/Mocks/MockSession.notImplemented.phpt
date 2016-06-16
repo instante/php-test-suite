@@ -2,14 +2,14 @@
 namespace Instante\Tests\Meta\Presenters\Mocks;
 
 use Instante\Tests\Presenters\Mocks\MockSession;
-use Instante\Tests\TestBootstrap;
+use Instante\Tests\Meta\SandboxTestBootstrap;
 use Nette\NotImplementedException;
 use Tester\Assert;
 
 require __DIR__ . '/../../../bootstrap.php';
 require __DIR__ . '/dummySessionClasses.inc';
 
-TestBootstrap::prepareUnitTest();
+SandboxTestBootstrap::prepareUnitTest();
 
 //everything except getSection and hasSection is not implemented
 
