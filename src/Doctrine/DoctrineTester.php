@@ -78,6 +78,12 @@ class DoctrineTester
         $connection->prepare('SET FOREIGN_KEY_CHECKS = 1')->execute();
     }
 
+    /** @return EntityManager */
+    public function getEntityManager()
+    {
+        return $this->em;
+    }
+
 
     private function lock()
     {

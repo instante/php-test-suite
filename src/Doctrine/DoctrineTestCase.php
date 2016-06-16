@@ -19,10 +19,15 @@ abstract class DoctrineTestCase extends TestCase
     /** @var bool */
     private $prepared = FALSE;
 
-    public function __construct(Container $context)
+    public function __construct(DoctrineTester $doctrineTester)
     {
-        $this->databaseTester = DoctrineTester::createFromContainer($context);
-        $this->em = $context->getByType(EntityManager::class);
+        $this->databaseTester = $doctrineTester;
+        $this->em = $doctrineTester->getEntityManager();
+    }
+
+    public static function createFromContainer(Container $context)
+    {
+        return new static(DoctrineTester::createFromContainer($context));
     }
 
 
