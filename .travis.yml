@@ -14,6 +14,7 @@ before_script:
   - composer self-update
   - composer install --no-interaction --prefer-source
   - ./vendor/bin/parallel-lint -e php,phpt --exclude vendor .
+  - mysql -e 'create database php_test_suite_test collate utf8_general_ci;'
 
 script: ./tests/run-tests.sh
 

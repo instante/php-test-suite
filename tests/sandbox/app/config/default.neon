@@ -14,8 +14,8 @@ doctrine:
     driver: pdo_mysql
     host: 127.0.0.1
     dbname: php_test_suite_test
-    user: root
-    password: root
+    user: travis
+    password: ''
     charset: utf8
 
 migrations:
