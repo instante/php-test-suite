@@ -7,7 +7,8 @@
             "nette/security",
             "nette/http",
             "latte/latte",
-            "nette/utils"
+            "nette/utils",
+            "instante/doctrine"
         ]
     }
 }
