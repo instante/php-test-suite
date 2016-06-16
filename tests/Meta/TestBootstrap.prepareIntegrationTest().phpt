@@ -21,7 +21,7 @@ class CliPresenterHackTestBootstrap extends TestBootstrap
     }
 }
 
-TestBootstrap::$tempDir = __DIR__ . '/../temp';
+CliPresenterHackTestBootstrap::$tempDir = __DIR__ . '/../temp';
 $container = CliPresenterHackTestBootstrap::prepareIntegrationTest(realpath(__DIR__ . '/../sandbox/tests'));
 
 Assert::type(Container::class, $container, 'container created');
