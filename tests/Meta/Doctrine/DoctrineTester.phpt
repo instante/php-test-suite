@@ -12,7 +12,7 @@ use Tester\Environment;
 require __DIR__ . '/../../bootstrap.php';
 
 if (!class_exists(EntityManager::class)) {
-    Environment::skip('Install nette/application to enable presenter tests.');
+    Environment::skip('Install instante/doctrine to enable database tests.');
 }
 
 require __DIR__ . '/DoctrineTestBootstrap.php';
