@@ -8,6 +8,7 @@ use Instante\Tests\Presenters\Mocks\SimpleLatteFactory;
 use Instante\Tests\Presenters\PresenterTester;
 use Nette\Bridges\ApplicationLatte\TemplateFactory;
 use Nette\Caching\Storages\DevNullStorage;
+use Nette\Http\Response;
 use Nette\StaticClassException;
 
 class LatteConfigurator
@@ -17,13 +18,24 @@ class LatteConfigurator
     public static function configurePDC(PrimaryDependencyContainer $pdc)
     {
         $pdc->setTemplateFactory(new DeferredTemplateFactory(function () use ($pdc) {
-            return new TemplateFactory(
-                new SimpleLatteFactory,
-                $pdc->getUsedHttpRequest(),
-                $pdc->getHttpResponse(),
-                $pdc->getUserService(),
-                new DevNullStorage
-            );
+            $refl = new \ReflectionClass(TemplateFactory::class);
+            if ($refl->getConstructor()->getParameters()[2]->getClass()->getName() === Response::class
+            ) { // Latte < 2.4
+                return new TemplateFactory(
+                    new SimpleLatteFactory,
+                    $pdc->getUsedHttpRequest(),
+                    $pdc->getHttpResponse(),
+                    $pdc->getUserService(),
+                    new DevNullStorage
+                );
+            } else { // Latte >= 2.4
+                return new TemplateFactory(
+                    new SimpleLatteFactory,
+                    $pdc->getUsedHttpRequest(),
+                    $pdc->getUserService(),
+                    new DevNullStorage
+                );
+            }
         }));
     }
 
