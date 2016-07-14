@@ -76,6 +76,7 @@ class DoctrineTester
             }
         }
         $connection->prepare('SET FOREIGN_KEY_CHECKS = 1')->execute();
+        $this->em->clear();
     }
 
     /** @return EntityManager */
