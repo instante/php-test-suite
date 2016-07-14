@@ -65,7 +65,7 @@ class DependencyContainer
                 if (!is_array($this->dependencies[$injectName])) {
                     $this->dependencies[$injectName] = [$this->dependencies[$injectName]];
                 }
-                call_user_func_array($presenter->$method, $this->dependencies[$injectName]);
+                call_user_func_array([$presenter, $method], $this->dependencies[$injectName]);
             }
         }
     }
