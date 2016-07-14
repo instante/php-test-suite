@@ -20,7 +20,7 @@ class PresenterTesterTest extends TestCase
 {
     public function testConstructor()
     {
-        new PresenterTester('Instante\Tests\Presenters\TestPresenter', SandboxTestBootstrap::$tempDir);
+        new PresenterTester(TestPresenter::class, SandboxTestBootstrap::$tempDir);
         new PresenterTester(new TestPresenter, SandboxTestBootstrap::$tempDir);
         new PresenterTester(function () { return new TestPresenter; }, SandboxTestBootstrap::$tempDir);
         Assert::true(TRUE, 'Passing this test indicates that PresenterTester constructor accepts all desired argument types.');
@@ -48,7 +48,7 @@ class PresenterTesterTest extends TestCase
         ]);
         $tester->runPresenter();
         $presenter = $baz->presenter;
-        Assert::type('Nette\Application\UI\Presenter', $presenter, 'Presenter should have been passed via $baz');
+        Assert::type(Presenter::class, $presenter, 'Presenter should have been passed via $baz');
         Assert::same(2, $presenter->foo->no, 'overriden repeatedly injected property');
         Assert::same(3, $presenter->bar->no, 'injected via @inject annotation');
         Assert::same(4, $presenter->baz->no, 'injected single property not wrapped into array via inject*() method');
@@ -62,7 +62,7 @@ class PresenterTesterTest extends TestCase
         $tester->runPresenter();
         Assert::exception(function () use ($tester) {
             $tester->runPresenter();
-        }, 'Nette\InvalidStateException');
+        }, Nette\InvalidStateException::class);
 
         //should not fail - presenter passed by class or factory method can be used multiple times
         $tester = new PresenterTester(TestPresenter::class, SandboxTestBootstrap::$tempDir);
