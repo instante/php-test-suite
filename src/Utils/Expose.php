@@ -2,7 +2,7 @@
 
 namespace Instante\Tests\Utils;
 
-use Nette\Reflection\ClassType;
+use ReflectionClass;
 
 /**
  * This class is used to easily access protected and private members of an object
@@ -22,7 +22,7 @@ class Expose
     public function __construct($obj)
     {
         $this->obj = $obj;
-        $this->refl = new ClassType($obj);
+        $this->refl = new ReflectionClass($obj);
     }
 
     /**
