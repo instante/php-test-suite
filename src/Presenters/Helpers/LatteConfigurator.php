@@ -8,7 +8,7 @@ use Instante\Tests\Presenters\Mocks\SimpleLatteFactory;
 use Instante\Tests\Presenters\PresenterTester;
 use Nette\Bridges\ApplicationLatte\TemplateFactory;
 use Nette\Caching\Storages\DevNullStorage;
-use Nette\Http\Response;
+use Nette\Http\IResponse;
 use Nette\StaticClassException;
 
 class LatteConfigurator
@@ -19,7 +19,7 @@ class LatteConfigurator
     {
         $pdc->setTemplateFactory(new DeferredTemplateFactory(function () use ($pdc) {
             $refl = new \ReflectionClass(TemplateFactory::class);
-            if ($refl->getConstructor()->getParameters()[2]->getClass()->getName() === Response::class
+            if ($refl->getConstructor()->getParameters()[2]->getClass()->getName() === IResponse::class
             ) { // Latte < 2.4
                 return new TemplateFactory(
                     new SimpleLatteFactory,
