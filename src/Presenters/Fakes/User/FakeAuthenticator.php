@@ -1,16 +1,15 @@
 <?php
 
-namespace Instante\Tests\Presenters\Mocks\User;
+namespace Instante\Tests\Presenters\Fakes\User;
 
 use Nette\Security\AuthenticationException;
 use Nette\Security\IAuthenticator;
 use Nette\Security\Identity;
-use Nette\Security\IIdentity;
 
 /**
  * Trivial implementation taken from Nette SimpleAuthenticator, lists made mutable for easier testing purposes
  */
-class MockAuthenticator implements IAuthenticator
+class FakeAuthenticator implements IAuthenticator
 {
     /** @var array list of pairs username => [password, identity] | password */
     public $userList;

@@ -2,6 +2,10 @@
 
 namespace Instante\Tests;
 
+use Mockery;
+use Mockery\Expectation;
+use Mockery\ExpectationDirector;
+use Mockery\Mock;
 use Nette\InvalidStateException;
 use Tester\Environment;
 use Nette\Loaders\RobotLoader;
@@ -39,11 +43,12 @@ class TestBootstrap
         static::checkPreparedOnce();
         static::unifyConfiguration();
         static::preparePaths($testsDir);
-        require static::$vendorDir . '/autoload.php';
+        require_once static::$vendorDir . '/autoload.php';
         Environment::setup();
 
         static::prepareTempDir();
         static::prepareRobotLoader();
+        static::prepareMockery();
     }
 
     public static function prepareIntegrationTest($testsDir = NULL)
@@ -152,5 +157,36 @@ class TestBootstrap
 
         $_SERVER['REQUEST_TIME'] = 1234567890;
         $_ENV = $_GET = $_POST = [];
+    }
+
+    protected static function prepareMockery()
+    {
+        register_shutdown_function(function () {
+            static::ignoreAssertionsWhenExpectations();
+            Mockery::close();
+        });
+    }
+
+    /**
+     * Do not check assertions were executed when there are constrainted mocks
+     */
+    protected static function ignoreAssertionsWhenExpectations()
+    {
+        /** @var Mock $mock */
+        foreach (\Mockery::getContainer()->getMocks() as $mock) {
+            /** @var ExpectationDirector $expectationDirector */
+            foreach ($mock->mockery_getExpectations() as $expectationDirector) {
+                /** @var Expectation $expectation */
+                foreach (array_merge(
+                             $expectationDirector->getExpectations(),
+                             $expectationDirector->getDefaultExpectations())
+                         as $expectation) {
+                    if ($expectation->isCallCountConstrained()) {
+                        Environment::$checkAssertions = FALSE;
+                        return;
+                    }
+                }
+            }
+        }
     }
 }

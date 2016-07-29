@@ -1,8 +1,8 @@
 <?php
-namespace Instante\Tests\Meta\Presenters\Mocks;
+namespace Instante\Tests\Meta\Presenters\Fakes;
 
-use Instante\Tests\Presenters\Mocks\MockTemplate;
-use Instante\Tests\Presenters\Mocks\MockTemplateFactory;
+use Instante\Tests\Presenters\Fakes\FakeTemplate;
+use Instante\Tests\Presenters\Fakes\FakeTemplateFactory;
 use Instante\Tests\Meta\SandboxTestBootstrap;
 use Nette\InvalidArgumentException;
 use Nette\InvalidStateException;
@@ -12,9 +12,9 @@ require __DIR__ . '/../bs-presenters.php';
 
 SandboxTestBootstrap::prepareUnitTest();
 
-$mtf = new MockTemplateFactory();
+$mtf = new FakeTemplateFactory();
 $t = $mtf->createTemplate();
-Assert::type(MockTemplate::class, $t);
+Assert::type(FakeTemplate::class, $t);
 $t->{'pipe'} = $pipe = 'Ceci n`est pas une modèle.';
 Assert::same($pipe, $t->{'pipe'});
 

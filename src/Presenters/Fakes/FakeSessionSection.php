@@ -1,8 +1,8 @@
 <?php
 
-namespace Instante\Tests\Presenters\Mocks;
+namespace Instante\Tests\Presenters\Fakes;
 
-class MockSessionSection implements \IteratorAggregate, \ArrayAccess
+class FakeSessionSection implements \IteratorAggregate, \ArrayAccess
 {
     /** @var array */
     public $data = [];

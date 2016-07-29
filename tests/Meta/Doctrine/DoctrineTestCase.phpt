@@ -4,7 +4,9 @@ namespace Instante\Tests\Meta\Doctrine;
 
 use Instante\Tests\Doctrine\DoctrineTestCase;
 use Instante\Tests\Doctrine\DoctrineTester;
+use Instante\Tests\Meta\DoctrineTestBootstrap;
 use Kdyby\Doctrine\EntityManager;
+use Mockery;
 use Tester\Assert;
 use Tester\Environment;
 
@@ -15,42 +17,7 @@ if (!class_exists(EntityManager::class)) {
 }
 
 require __DIR__ . '/DoctrineTestBootstrap.php';
-
-
-class DummyEntityManager extends EntityManager
-{
-    /** @noinspection PhpMissingParentConstructorInspection */
-    public function __construct()
-    {
-    }
-}
-
-class MockDoctrineTester extends DoctrineTester
-{
-    public $prepareDatabaseTestCalls = 0;
-    public $clearDatabaseCalls = 0;
-
-    /** @noinspection PhpMissingParentConstructorInspection */
-    public function __construct()
-    {
-    }
-
-    public function prepareDatabaseTest()
-    {
-        $this->prepareDatabaseTestCalls++;
-    }
-
-    public function clearDatabase()
-    {
-        $this->clearDatabaseCalls++;
-    }
-
-    public function getEntityManager()
-    {
-        return new DummyEntityManager;
-    }
-
-}
+DoctrineTestBootstrap::prepareUnitTest();
 
 class DoctrineTestCaseTest extends DoctrineTestCase
 {
@@ -72,8 +39,8 @@ class DoctrineTestCaseTest extends DoctrineTestCase
     }
 }
 
-$mdt = new MockDoctrineTester;
-(new DoctrineTestCaseTest($mdt))->run();
-
-Assert::same(5, $mdt->clearDatabaseCalls); //3 in tearDown, 2 in setUp
-Assert::same(1, $mdt->prepareDatabaseTestCalls); //called only for first test
+$mockDoctrineTester = mock(DoctrineTester::class);
+$mockDoctrineTester->shouldReceive('prepareDatabaseTest')->once();
+$mockDoctrineTester->shouldReceive('clearDatabase')->times(5);
+$mockDoctrineTester->shouldReceive('getEntityManager');
+(new DoctrineTestCaseTest($mockDoctrineTester))->run();

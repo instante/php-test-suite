@@ -10,7 +10,7 @@ use Tester\Assert;
 
 require __DIR__ . '/../bs-presenters.php';
 
-class MockSimplePresenter extends Presenter
+class FakePresenter extends Presenter
 {
 }
 
@@ -20,7 +20,7 @@ $rb = new RequestBuilder('Foo', SandboxTestBootstrap::$tempDir . '/uploads');
 $pdc = new PrimaryDependencyContainer($rb);
 $pdc->setContext($context = new Container);
 
-$p = new MockSimplePresenter;
+$p = new FakePresenter;
 $pdc->injectTo($p);
 Assert::same($pdc->getUserStorage(), $p->getUser()->getStorage());
 /** @noinspection PhpDeprecationInspection */

@@ -1,7 +1,7 @@
 <?php
-namespace Instante\Tests\Meta\Presenters\Mocks\User;
+namespace Instante\Tests\Meta\Presenters\Fakes\User;
 
-use Instante\Tests\Presenters\Mocks\User\MockAuthenticator;
+use Instante\Tests\Presenters\Fakes\User\FakeAuthenticator;
 use Instante\Tests\Meta\SandboxTestBootstrap;
 use Nette\Security\AuthenticationException;
 use Nette\Security\IAuthenticator;
@@ -12,7 +12,7 @@ require __DIR__ . '/../../bs-presenters.php';
 
 SandboxTestBootstrap::prepareUnitTest();
 
-class MockMooIdentity implements IIdentity
+class FakeIdentity implements IIdentity
 {
     function getId()
     {
@@ -25,10 +25,10 @@ class MockMooIdentity implements IIdentity
     }
 }
 
-$ma = new MockAuthenticator;
+$ma = new FakeAuthenticator;
 $ma->userList = [
     'foo' => 'bar',
-    'moo' => ['boo', new MockMooIdentity],
+    'moo' => ['boo', new FakeIdentity],
     'zoo' => 'baz',
 ];
 $ma->usersRoles = [
@@ -43,7 +43,7 @@ Assert::equal([], $i->getRoles());
 
 //user with given identity
 $i2 = $ma->authenticate(['moo', 'boo']);
-Assert::type(MockMooIdentity::class, $i2);
+Assert::type(FakeIdentity::class, $i2);
 Assert::equal(['mooRole'], $i2->getRoles());
 
 //user with given role

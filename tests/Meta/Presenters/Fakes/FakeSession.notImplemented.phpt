@@ -1,20 +1,21 @@
 <?php
-namespace Instante\Tests\Meta\Presenters\Mocks;
+namespace Instante\Tests\Meta\Presenters\Fakes;
 
-use Instante\Tests\Presenters\Mocks\MockSession;
+use Instante\Tests\Presenters\Fakes\FakeSession;
 use Instante\Tests\Meta\SandboxTestBootstrap;
 use Nette\NotImplementedException;
 use Tester\Assert;
 
 require __DIR__ . '/../bs-presenters.php';
-require __DIR__ . '/dummySessionClasses.inc';
 
 SandboxTestBootstrap::prepareUnitTest();
 
 //everything except getSection and hasSection is not implemented
 
 
-$ms = new MockSession;
+$ms = new FakeSession;
+/** @noinspection PhpUnnecessaryFullyQualifiedNameInspection because of ISessionStorage */
+/** @noinspection PhpDeprecationInspection because of ISessionStorage */
 $methods = [
     'start' => [],
     'isStarted' => [],
@@ -32,8 +33,8 @@ $methods = [
     'setCookieParameters' => ['a'],
     'getCookieParameters' => [],
     'setSavePath' => ['a'],
-    'setStorage' => [new DummySessionStorage],
-    'setHandler' => [new DummySessionHandler],
+    'setStorage' => [mock(\Nette\Http\ISessionStorage::class)],
+    'setHandler' => [mock(\SessionHandlerInterface::class)],
 ];
 
 foreach ($methods as $method => $args) {

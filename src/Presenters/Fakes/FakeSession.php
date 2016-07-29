@@ -1,13 +1,16 @@
 <?php
 
-namespace Instante\Tests\Presenters\Mocks;
+namespace Instante\Tests\Presenters\Fakes;
 
 use /** @noinspection PhpDeprecationInspection */
     Nette\Http\ISessionStorage;
 use Nette\Http\Session;
+use Nette\Http\SessionSection;
 use Nette\NotImplementedException;
+use SessionHandlerInterface;
 
-class MockSession extends Session
+// TODO: create FakeGenerator and base this on it
+class FakeSession extends Session
 {
     /** @var array */
     public $sections = [];
@@ -17,10 +20,10 @@ class MockSession extends Session
     {
     }
 
-    public function getSection($section, $class = 'Nette\Http\SessionSection')
+    public function getSection($section, $class = SessionSection::class)
     {
         if (!isset($this->sections[$section])) {
-            $this->sections[$section] = new MockSessionSection;
+            $this->sections[$section] = new FakeSessionSection;
         }
         return $this->sections[$section];
     }
@@ -30,106 +33,106 @@ class MockSession extends Session
         return isset($this->sections[$section]);
     }
 
-    private static function notInMock()
+    private static function notInFake()
     {
-        throw new NotImplementedException('This simple mock supports only getSection() and hasSection() methods.');
+        throw new NotImplementedException('This fake implementation supports only getSection() and hasSection() methods.');
     }
 
     public function start()
     {
-        self::notInMock();
+        self::notInFake();
     }
 
     public function isStarted()
     {
-        self::notInMock();
+        self::notInFake();
     }
 
     public function close()
     {
-        self::notInMock();
+        self::notInFake();
     }
 
     public function destroy()
     {
-        self::notInMock();
+        self::notInFake();
     }
 
     public function exists()
     {
-        self::notInMock();
+        self::notInFake();
     }
 
     public function regenerateId()
     {
-        self::notInMock();
+        self::notInFake();
     }
 
     public function getId()
     {
-        self::notInMock();
+        self::notInFake();
     }
 
     public function setName($name)
     {
-        self::notInMock();
+        self::notInFake();
     }
 
     public function getName()
     {
-        self::notInMock();
+        self::notInFake();
     }
 
     public function getIterator()
     {
-        self::notInMock();
+        self::notInFake();
     }
 
     public function clean()
     {
-        self::notInMock();
+        self::notInFake();
     }
 
     public function setOptions(array $options)
     {
-        self::notInMock();
+        self::notInFake();
     }
 
     public function getOptions()
     {
-        self::notInMock();
+        self::notInFake();
     }
 
     public function setExpiration($time)
     {
-        self::notInMock();
+        self::notInFake();
     }
 
     public function setCookieParameters($path, $domain = NULL, $secure = NULL)
     {
-        self::notInMock();
+        self::notInFake();
     }
 
     public function getCookieParameters()
     {
-        self::notInMock();
+        self::notInFake();
     }
 
     public function setSavePath($path)
     {
-        self::notInMock();
+        self::notInFake();
     }
 
     public function setStorage(
         /** @noinspection PhpDeprecationInspection */
         ISessionStorage $storage
     ) {
-        self::notInMock();
+        self::notInFake();
     }
 
-    public function setHandler(\SessionHandlerInterface $handler)
+    public function setHandler(SessionHandlerInterface $handler)
     {
-        self::notInMock();
+        self::notInFake();
     }
 
 }

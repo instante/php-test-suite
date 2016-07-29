@@ -1,10 +1,10 @@
 <?php
 
-namespace Instante\Tests\Presenters\Mocks\User;
+namespace Instante\Tests\Presenters\Fakes\User;
 
 use Nette\Security\IAuthorizator;
 
-class MockAuthorizator implements IAuthorizator
+class FakeAuthorizator implements IAuthorizator
 {
     public $acl = [];
 

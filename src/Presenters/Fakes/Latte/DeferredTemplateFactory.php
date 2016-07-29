@@ -1,6 +1,6 @@
 <?php
 
-namespace Instante\Tests\Presenters\Mocks\Latte;
+namespace Instante\Tests\Presenters\Fakes\Latte;
 
 use Nette\Application\UI\Control;
 use Nette\Application\UI\ITemplate;

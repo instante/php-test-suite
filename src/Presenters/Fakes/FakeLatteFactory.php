@@ -1,11 +1,11 @@
 <?php
 
-namespace Instante\Tests\Presenters\Mocks;
+namespace Instante\Tests\Presenters\Fakes;
 
 use Latte\Engine;
 use Nette\Bridges\ApplicationLatte\ILatteFactory;
 
-class SimpleLatteFactory implements ILatteFactory
+class FakeLatteFactory implements ILatteFactory
 {
     public function create()
     {

@@ -3,8 +3,8 @@
 namespace Instante\Tests\Presenters\Helpers;
 
 use Instante\Tests\Presenters\DI\PrimaryDependencyContainer;
-use Instante\Tests\Presenters\Mocks\Latte\DeferredTemplateFactory;
-use Instante\Tests\Presenters\Mocks\SimpleLatteFactory;
+use Instante\Tests\Presenters\Fakes\Latte\DeferredTemplateFactory;
+use Instante\Tests\Presenters\Fakes\FakeLatteFactory;
 use Instante\Tests\Presenters\PresenterTester;
 use Nette\Bridges\ApplicationLatte\TemplateFactory;
 use Nette\Caching\Storages\DevNullStorage;
@@ -22,7 +22,7 @@ class LatteConfigurator
             if ($refl->getConstructor()->getParameters()[2]->getClass()->getName() === IResponse::class
             ) { // Latte < 2.4
                 return new TemplateFactory(
-                    new SimpleLatteFactory,
+                    new FakeLatteFactory,
                     $pdc->getUsedHttpRequest(),
                     $pdc->getHttpResponse(),
                     $pdc->getUserService(),
@@ -30,7 +30,7 @@ class LatteConfigurator
                 );
             } else { // Latte >= 2.4
                 return new TemplateFactory(
-                    new SimpleLatteFactory,
+                    new FakeLatteFactory,
                     $pdc->getUsedHttpRequest(),
                     $pdc->getUserService(),
                     new DevNullStorage

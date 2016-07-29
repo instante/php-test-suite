@@ -2,12 +2,12 @@
 
 namespace Instante\Tests\Presenters\DI;
 
-use Instante\Tests\Presenters\Mocks\MockPresenterFactory;
-use Instante\Tests\Presenters\Mocks\MockSession;
-use Instante\Tests\Presenters\Mocks\MockTemplateFactory;
-use Instante\Tests\Presenters\Mocks\User\MockAuthenticator;
-use Instante\Tests\Presenters\Mocks\User\MockAuthorizator;
-use Instante\Tests\Presenters\Mocks\User\MockUserStorage;
+use Instante\Tests\Presenters\Fakes\FakePresenterFactory;
+use Instante\Tests\Presenters\Fakes\FakeSession;
+use Instante\Tests\Presenters\Fakes\FakeTemplateFactory;
+use Instante\Tests\Presenters\Fakes\User\FakeAuthenticator;
+use Instante\Tests\Presenters\Fakes\User\FakeAuthorizator;
+use Instante\Tests\Presenters\Fakes\User\FakeUserStorage;
 use Instante\Tests\Presenters\Request\RequestBuilder;
 use Nette\Application\IPresenterFactory;
 use Nette\Application\IRouter;
@@ -60,7 +60,7 @@ class PrimaryDependencyContainer
     /** @var AppRequest */
     private $appRequest;
 
-    /** @var Container - not mocked by default */
+    /** @var Container - not faked by default */
     private $context;
 
     /** @var IHttpRequest */
@@ -77,12 +77,12 @@ class PrimaryDependencyContainer
         $this->requestBuilder = $requestBuilder;
         $this->httpResponse = new HttpResponse;
         $this->router = new SimpleRouter;
-        $this->presenterFactory = new MockPresenterFactory;
-        $this->session = new MockSession;
-        $this->userStorage = new MockUserStorage;
-        $this->authenticator = new MockAuthenticator;
-        $this->authorizator = new MockAuthorizator;
-        $this->templateFactory = new MockTemplateFactory;
+        $this->presenterFactory = new FakePresenterFactory;
+        $this->session = new FakeSession;
+        $this->userStorage = new FakeUserStorage;
+        $this->authenticator = new FakeAuthenticator;
+        $this->authorizator = new FakeAuthorizator;
+        $this->templateFactory = new FakeTemplateFactory;
     }
 
     /**
