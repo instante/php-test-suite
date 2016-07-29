@@ -2,6 +2,7 @@
 
 namespace Instante\Tests;
 
+use Mockery;
 use Nette\InvalidStateException;
 use Tester\Environment;
 use Nette\Loaders\RobotLoader;
@@ -44,6 +45,7 @@ class TestBootstrap
 
         static::prepareTempDir();
         static::prepareRobotLoader();
+        static::prepareMockery();
     }
 
     public static function prepareIntegrationTest($testsDir = NULL)
@@ -152,5 +154,12 @@ class TestBootstrap
 
         $_SERVER['REQUEST_TIME'] = 1234567890;
         $_ENV = $_GET = $_POST = [];
+    }
+
+    protected static function prepareMockery()
+    {
+        register_shutdown_function(function () {
+            Mockery::close();
+        });
     }
 }
