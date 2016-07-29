@@ -8,6 +8,10 @@ use Tester\Assert;
 
 require __DIR__ . '/../bs-presenters.php';
 
+/*
+ * Intentionally not using Mockery, as the object has to be analyzable directly via reflection
+ */
+
 class MockInjectionPresenter extends Presenter
 {
     /** @var \stdClass @inject */
