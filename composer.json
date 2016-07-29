@@ -14,7 +14,8 @@
     "require": {
         "php": ">=5.5.0",
         "nette/tester": "@dev",
-        "nette/bootstrap": "~2.2"
+        "nette/bootstrap": "~2.2",
+        "mockery/mockery": "@dev"
     },
     "require-dev": {
         "jakub-onderka/php-parallel-lint": "~0.6",
