@@ -39,7 +39,7 @@ class TestBootstrap
         static::checkPreparedOnce();
         static::unifyConfiguration();
         static::preparePaths($testsDir);
-        require static::$vendorDir . '/autoload.php';
+        require_once static::$vendorDir . '/autoload.php';
         Environment::setup();
 
         static::prepareTempDir();
