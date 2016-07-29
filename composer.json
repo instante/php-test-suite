@@ -36,8 +36,8 @@
         "nette/security": "Required for PresenterTester",
         "nette/http": "Required for PresenterTester",
         "latte/latte": "Required for rendering latte templates with PresenterTester",
-        "instante/doctrine": "for creating database tests",
-        "tracy/tracy": "needed by kdyby/events"
+        "instante/doctrine": "For creating database tests",
+        "tracy/tracy": "Needed by kdyby/events",
     },
     "autoload": {
         "psr-4": {
