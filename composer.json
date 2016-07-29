@@ -42,7 +42,10 @@
     "autoload": {
         "psr-4": {
             "Instante\\Tests\\": "src/"
-        }
+        },
+        "files": [
+            "src/shortcuts.php"
+        ]
     },
     "bin": [
         "src/test-bootstrap.php"
