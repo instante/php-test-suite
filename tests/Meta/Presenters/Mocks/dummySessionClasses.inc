@@ -1,6 +1,6 @@
 <?php
 
-namespace Instante\Tests\Meta\Presenters\Mocks;
+namespace Instante\Tests\Meta\Presenters\Fakes;
 
 use /** @noinspection PhpDeprecationInspection */
     Nette\Http\ISessionStorage;

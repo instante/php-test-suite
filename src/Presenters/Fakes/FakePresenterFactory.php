@@ -1,13 +1,13 @@
 <?php
 
-namespace Instante\Tests\Presenters\Mocks;
+namespace Instante\Tests\Presenters\Fakes;
 
 use Nette\Application\IPresenterFactory;
 use Nette\Application\UI\InvalidLinkException;
 use Nette\Application\UI\Presenter;
 use Nette\NotImplementedException;
 
-class MockPresenterFactory implements IPresenterFactory
+class FakePresenterFactory implements IPresenterFactory
 {
     public $presenterClassMap = [];
 
@@ -21,7 +21,7 @@ class MockPresenterFactory implements IPresenterFactory
 
     public function createPresenter($name)
     {
-        throw new NotImplementedException(Presenter::class . ' does not use ::createPresenter() method. This mock'
-            . ' serves only for Presenter`s internal dependency.');
+        throw new NotImplementedException(Presenter::class . ' does not use ::createPresenter() method. This fake'
+            . ' implementation serves only as Presenter\'s internal dependency.');
     }
 }

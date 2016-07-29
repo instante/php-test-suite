@@ -1,11 +1,11 @@
 <?php
 
-namespace Instante\Tests\Presenters\Mocks\User;
+namespace Instante\Tests\Presenters\Fakes\User;
 
 use Nette\Security\IIdentity;
 use Nette\Security\IUserStorage;
 
-class MockUserStorage implements IUserStorage
+class FakeUserStorage implements IUserStorage
 {
     /** @var bool */
     private $authenticated = FALSE;

@@ -1,7 +1,7 @@
 <?php
-namespace Instante\Tests\Meta\Presenters\Mocks;
+namespace Instante\Tests\Meta\Presenters\Fakes;
 
-use Instante\Tests\Presenters\Mocks\MockSession;
+use Instante\Tests\Presenters\Fakes\FakeSession;
 use Instante\Tests\Meta\SandboxTestBootstrap;
 use Tester\Assert;
 
@@ -11,7 +11,7 @@ SandboxTestBootstrap::prepareUnitTest();
 
 //only getSection and hasSection are implemented
 
-$s = new MockSession;
+$s = new FakeSession;
 Assert::false($s->hasSection('aaa'));
 $aaa = $s->getSection('aaa');
 Assert::true($s->hasSection('aaa'));

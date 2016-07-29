@@ -1,12 +1,12 @@
 <?php
 
-namespace Instante\Tests\Presenters\Mocks;
+namespace Instante\Tests\Presenters\Fakes;
 
 use Nette\Application\UI\ITemplate;
 use Nette\InvalidArgumentException;
 use Nette\InvalidStateException;
 
-class MockTemplate implements ITemplate
+class FakeTemplate implements ITemplate
 {
     /** @var string */
     private $file;

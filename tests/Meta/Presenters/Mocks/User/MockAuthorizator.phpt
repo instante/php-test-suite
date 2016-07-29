@@ -1,7 +1,7 @@
 <?php
-namespace Instante\Tests\Meta\Presenters\Mocks\User;
+namespace Instante\Tests\Meta\Presenters\Fakes\User;
 
-use Instante\Tests\Presenters\Mocks\User\MockAuthorizator;
+use Instante\Tests\Presenters\Fakes\User\FakeAuthorizator;
 use Instante\Tests\Meta\SandboxTestBootstrap;
 use Tester\Assert;
 
@@ -9,7 +9,7 @@ require __DIR__ . '/../../bs-presenters.php';
 
 SandboxTestBootstrap::prepareUnitTest();
 
-$ma = new MockAuthorizator;
+$ma = new FakeAuthorizator;
 $ma->acl = [
     'fooRole' => [
         'xResource' =>

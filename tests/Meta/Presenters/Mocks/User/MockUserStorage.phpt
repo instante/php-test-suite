@@ -1,7 +1,7 @@
 <?php
-namespace Instante\Tests\Meta\Presenters\Mocks\User;
+namespace Instante\Tests\Meta\Presenters\Fakes\User;
 
-use Instante\Tests\Presenters\Mocks\User\MockUserStorage;
+use Instante\Tests\Presenters\Fakes\User\FakeUserStorage;
 use Instante\Tests\Meta\SandboxTestBootstrap;
 use Nette\Security\Identity;
 use Nette\Security\IUserStorage;
@@ -11,7 +11,7 @@ require __DIR__ . '/../../bs-presenters.php';
 
 SandboxTestBootstrap::prepareUnitTest();
 
-$mus = new MockUserStorage;
+$mus = new FakeUserStorage;
 Assert::false($mus->isAuthenticated());
 Assert::null($mus->getIdentity());
 Assert::null($mus->getLogoutReason());

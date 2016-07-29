@@ -1,7 +1,7 @@
 <?php
-namespace Instante\Tests\Meta\Presenters\Mocks;
+namespace Instante\Tests\Meta\Presenters\Fakes;
 
-use Instante\Tests\Presenters\Mocks\MockSession;
+use Instante\Tests\Presenters\Fakes\FakeSession;
 use Instante\Tests\Meta\SandboxTestBootstrap;
 use Nette\NotImplementedException;
 use Tester\Assert;
@@ -14,7 +14,7 @@ SandboxTestBootstrap::prepareUnitTest();
 //everything except getSection and hasSection is not implemented
 
 
-$ms = new MockSession;
+$ms = new FakeSession;
 $methods = [
     'start' => [],
     'isStarted' => [],

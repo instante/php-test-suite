@@ -1,7 +1,7 @@
 <?php
-namespace Instante\Tests\Meta\Presenters\Mocks\User;
+namespace Instante\Tests\Meta\Presenters\Fakes\User;
 
-use Instante\Tests\Presenters\Mocks\User\MockAuthenticator;
+use Instante\Tests\Presenters\Fakes\User\FakeAuthenticator;
 use Instante\Tests\Meta\SandboxTestBootstrap;
 use Nette\Security\AuthenticationException;
 use Nette\Security\IAuthenticator;
@@ -25,7 +25,7 @@ class MockMooIdentity implements IIdentity
     }
 }
 
-$ma = new MockAuthenticator;
+$ma = new FakeAuthenticator;
 $ma->userList = [
     'foo' => 'bar',
     'moo' => ['boo', new MockMooIdentity],
