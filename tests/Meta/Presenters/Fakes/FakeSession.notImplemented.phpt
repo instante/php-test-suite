@@ -7,7 +7,6 @@ use Nette\NotImplementedException;
 use Tester\Assert;
 
 require __DIR__ . '/../bs-presenters.php';
-require __DIR__ . '/dummySessionClasses.inc';
 
 SandboxTestBootstrap::prepareUnitTest();
 
@@ -15,6 +14,8 @@ SandboxTestBootstrap::prepareUnitTest();
 
 
 $ms = new FakeSession;
+/** @noinspection PhpUnnecessaryFullyQualifiedNameInspection because of ISessionStorage */
+/** @noinspection PhpDeprecationInspection because of ISessionStorage */
 $methods = [
     'start' => [],
     'isStarted' => [],
@@ -32,8 +33,8 @@ $methods = [
     'setCookieParameters' => ['a'],
     'getCookieParameters' => [],
     'setSavePath' => ['a'],
-    'setStorage' => [new DummySessionStorage],
-    'setHandler' => [new DummySessionHandler],
+    'setStorage' => [mock(\Nette\Http\ISessionStorage::class)],
+    'setHandler' => [mock(\SessionHandlerInterface::class)],
 ];
 
 foreach ($methods as $method => $args) {
