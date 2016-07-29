@@ -39,7 +39,7 @@ class DoctrineTestCaseTest extends DoctrineTestCase
     }
 }
 
-$mockDoctrineTester = Mockery::mock(DoctrineTester::class);
+$mockDoctrineTester = mock(DoctrineTester::class);
 $mockDoctrineTester->shouldReceive('prepareDatabaseTest')->once();
 $mockDoctrineTester->shouldReceive('clearDatabase')->times(5);
 $mockDoctrineTester->shouldReceive('getEntityManager');
