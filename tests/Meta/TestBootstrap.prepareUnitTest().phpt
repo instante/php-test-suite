@@ -2,13 +2,13 @@
 namespace Instante\Tests\Meta;
 
 use Instante\Tests\TestBootstrap;
-use Mockery;
+use Instante\Tests\Utils\MockStatic;
 use Nette\InvalidStateException;
 use Tester\Assert;
 
 require_once '../../vendor/autoload.php';
 
-$mockEnvironment = Mockery::mock('alias:Tester\Environment');
+$mockEnvironment = MockStatic::mock('Tester\Environment', ['checkAssertions']);
 $mockEnvironment->shouldReceive('setup')->once();
 
 require __DIR__ . '/../../src/test-bootstrap.php';
