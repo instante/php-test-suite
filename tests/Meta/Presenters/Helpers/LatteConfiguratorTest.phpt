@@ -4,7 +4,6 @@ namespace Instante\Tests\Meta\Presenters;
 use Instante\Tests\Presenters\Helpers\LatteConfigurator;
 use Instante\Tests\Presenters\PresenterTester;
 use Instante\Tests\Meta\SandboxTestBootstrap;
-use Nette;
 use Nette\Application\UI\Presenter;
 use Tester\Assert;
 
