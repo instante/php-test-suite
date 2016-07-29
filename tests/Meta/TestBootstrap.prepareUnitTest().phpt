@@ -2,20 +2,14 @@
 namespace Instante\Tests\Meta;
 
 use Instante\Tests\TestBootstrap;
+use Mockery;
 use Nette\InvalidStateException;
 use Tester\Assert;
 
-class MockEnvironment
-{
-    public static $called = FALSE;
+require_once '../../vendor/autoload.php';
 
-    public static function setup()
-    {
-        self::$called = TRUE;
-    }
-}
-
-class_alias(MockEnvironment::class, 'Tester\Environment');
+$mockEnvironment = Mockery::mock('alias:Tester\Environment');
+$mockEnvironment->shouldReceive('setup')->once();
 
 require __DIR__ . '/../../src/test-bootstrap.php';
 
@@ -37,6 +31,3 @@ Assert::exception(function () {
 
 //test is temp dir ready
 Assert::true(is_dir(TestBootstrap::$tempDir) && is_writable(TestBootstrap::$tempDir), 'Prepared temp dir for tests');
-
-//test Environment::setup() was called
-Assert::true(MockEnvironment::$called, 'Environment::setup() called');
