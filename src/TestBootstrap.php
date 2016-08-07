@@ -6,6 +6,7 @@ use Mockery;
 use Mockery\Expectation;
 use Mockery\ExpectationDirector;
 use Mockery\Mock;
+use Nette\DI\Container;
 use Nette\InvalidStateException;
 use Tester\Environment;
 use Nette\Loaders\RobotLoader;
@@ -37,20 +38,54 @@ class TestBootstrap
     /** static class, cannot be instantiated */
     private function __construct() { }
 
-
-    public static function prepareUnitTest($testsDir = NULL)
+    /**
+     * Prepares common test environment, not dependent on testing Nette application:
+     *
+     *      - sets fixed request time and timezone
+     *      - purges _GET, _POST, _ENV
+     *      - calls Tester\Environment::setup()
+     *      - ensures tests temp directory exists
+     *      - validates Mockery expectations on shutdown
+     *
+     * @param string $tempDir
+     */
+    public static function prepareTestEnvironment($tempDir = NULL)
     {
+        if ($tempDir !== NULL) {
+            static::$tempDir = $tempDir;
+        }
+
         static::checkPreparedOnce();
         static::unifyConfiguration();
-        static::preparePaths($testsDir);
-        require_once static::$vendorDir . '/autoload.php';
         Environment::setup();
-
         static::prepareTempDir();
-        static::prepareRobotLoader();
         static::prepareMockery();
     }
 
+    /**
+     * Prepares environment for unit tests in Nette application:
+     *
+     *      - calls prepareTestEnvironment() to prepare basics
+     *      - auto-configures project paths relatively from tests directory
+     *      - loads Composer autoloader and Nette RobotLoader
+     *
+     * @param string $testsDir
+     */
+    public static function prepareUnitTest($testsDir = NULL)
+    {
+        static::preparePaths($testsDir);
+        require_once static::$vendorDir . '/autoload.php';
+        static::prepareTestEnvironment();
+        static::prepareRobotLoader();
+    }
+
+    /**
+     * Prepares environment for integration tests in Nette application - loads
+     * DI container with app configuration.
+     *
+     * @param string $testsDir
+     * @return Container;
+     */
     public static function prepareIntegrationTest($testsDir = NULL)
     {
 
