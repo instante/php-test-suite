@@ -210,12 +210,15 @@ class TestBootstrap
         /** @var Mock $mock */
         foreach (\Mockery::getContainer()->getMocks() as $mock) {
             /** @var ExpectationDirector $expectationDirector */
+
             foreach ($mock->mockery_getExpectations() as $expectationDirector) {
+                $expectations = $expectationDirector->getExpectations();
+                if (method_exists($expectationDirector, 'getDefaultExpectations')) {
+                    //mockery <=0.9.5 compatibility
+                    $expectations = array_merge($expectations, $expectationDirector->getDefaultExpectations());
+                }
                 /** @var Expectation $expectation */
-                foreach (array_merge(
-                             $expectationDirector->getExpectations(),
-                             $expectationDirector->getDefaultExpectations())
-                         as $expectation) {
+                foreach ($expectations as $expectation) {
                     if ($expectation->isCallCountConstrained()) {
                         Environment::$checkAssertions = FALSE;
                         return;
