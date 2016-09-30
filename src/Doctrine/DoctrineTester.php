@@ -72,7 +72,7 @@ class DoctrineTester
         $connection->prepare('SET FOREIGN_KEY_CHECKS = 0')->execute();
         foreach ($tables as $table) {
             if ($table !== 'db_version') {
-                $connection->prepare('TRUNCATE TABLE ' . $table)->execute();
+                $connection->prepare('TRUNCATE TABLE `' . $table . '`')->execute();
             }
         }
         $connection->prepare('SET FOREIGN_KEY_CHECKS = 1')->execute();
