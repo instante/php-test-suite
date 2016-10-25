@@ -2,6 +2,7 @@
 
 namespace Instante\Tests\Presenters\Request;
 
+use Instante\Tests\Presenters\TempDirNotSpecifiedException;
 use Nette\FileNotFoundException;
 use Nette\Http\FileUpload;
 use Nette\InvalidArgumentException;
@@ -31,6 +32,9 @@ class FilesBuilder
      * @param string $tmpName path to tmp copy of the file; $name is copied to a temp file if tmpName is NULL
      * @param int $error upload error
      * @return $this
+     *
+     * @throws FileNotFoundException
+     * @throws TempDirNotSpecifiedException
      */
     public function addFileUpload($key, $name, $tmpName = '', $error = UPLOAD_ERR_OK)
     {
@@ -44,6 +48,8 @@ class FilesBuilder
      * @param array|string $key - array key is used to nest files, like ['foo', 'bar'] for files['foo']['bar']
      * @param int $error upload error
      * @return $this
+     * @throws FileNotFoundException
+     * @throws TempDirNotSpecifiedException
      */
     public function addFailedFileUpload($key, $error = UPLOAD_ERR_NO_FILE)
     {
@@ -77,7 +83,7 @@ class FilesBuilder
      * @param int $error upload error
      * @return FileUpload
      * @throws FileNotFoundException
-     * @throws InvalidStateException
+     * @throws TempDirNotSpecifiedException
      */
     private function createFileUpload($name, $tmpName = '', $error = UPLOAD_ERR_OK)
     {
@@ -88,7 +94,7 @@ class FilesBuilder
             }
             if ($tmpName === '') {
                 if ($this->uploadTempDir === NULL) {
-                    throw new InvalidStateException('Temp dir for uploads was not configured, cannot test uploads');
+                    throw new TempDirNotSpecifiedException('Temp dir for uploads was not configured');
                 }
                 $tmpName = tempnam($this->uploadTempDir, 'InstanteTestUpload');
                 copy($name, $tmpName);
@@ -107,6 +113,8 @@ class FilesBuilder
      * Returns processed collection for http/app request
      *
      * @return FileUpload[]
+     * @throws FileNotFoundException
+     * @throws TempDirNotSpecifiedException
      */
     public function getFileUploads()
     {

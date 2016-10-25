@@ -52,11 +52,7 @@ class RequestBuilder
     public function __construct($presenterName, $uploadTempDir)
     {
         $this->presenterName = $presenterName;
-        if ($uploadTempDir === NULL) {
-            trigger_error('Temporary directory for uploaded files was not specified. Testing uploads will not be available.', E_USER_NOTICE);
-        } else {
-            $this->filesBuilder = new FilesBuilder($uploadTempDir);
-        }
+        $this->filesBuilder = new FilesBuilder($uploadTempDir);
     }
 
     public function buildApplicationRequest()

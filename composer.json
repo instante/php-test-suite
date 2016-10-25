@@ -45,6 +45,9 @@
         },
         "files": [
             "src/shortcuts.php"
+        ],
+        "classmap": [
+            "src/exceptions.php"
         ]
     },
     "bin": [
